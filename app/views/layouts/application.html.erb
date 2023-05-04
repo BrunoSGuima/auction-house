@@ -8,8 +8,24 @@
 
     <%= stylesheet_link_tag "application" %>
   </head>
-
   <body>
-    <%= yield %>
+    <header>
+    <h1> Leilão de Estoque </h1>
+      <nav> 
+      <% if user_signed_in? %>
+        <%= current_user.description %>
+        <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Entrar', new_user_session_path %>
+      <% end %>
+      </nav>
+      </header>
+      <main>
+        <div>
+          <%= notice %>
+          <%= alert %>
+        </div><br>
+      <%= yield %>
+    </main>
   </body>
 </html>
