@@ -8,5 +8,4 @@ describe "Usuário visita tela inicial" do
     expect(page).to have_content 'Leilão de Estoque'
   end
   
-  
 end

@@ -1,0 +1,24 @@
+<h1> Produtos: </h1>
+
+<%
+=begin%>
+ <%= link_to 'Cadastrar Novo', new_product_model_path %> 
+<%
+=end%>
+
+<% if @product_models.any? %>
+
+  <% @product_models.each do |pm| %>
+    <div>
+      <h2><%= pm.name %></h2>
+        <dl>
+          <dt>Código:</dt>
+          <dd><%=  pm.code %></dd>
+          <dt>Categoria:</dt>
+          <dd><%= pm.category %></dd>
+        </dl>
+    </div>
+  <% end %>
+<% else %>
+  <p> Nenhum produto cadastrado. </p>
+<% end %>
