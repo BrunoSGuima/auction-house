@@ -1,12 +1,10 @@
 class ProductModel < ApplicationRecord
+  belongs_to :category
   validates :code, :name, :description, :weight, :width, :height, :depth, presence: true
   validates :code, uniqueness: true
-
   before_validation :generate_code, on: :create
 
-  def dimension
-    "#{width} - #{height} - #{depth}"
-  end
+
 
 
 

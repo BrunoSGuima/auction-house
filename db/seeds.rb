@@ -7,3 +7,19 @@
 #   Character.create(name: "Luke", movie: movies.first)
 User.create!(name:'Bruno', email: 'bruno@email.com', password: '123456', cpf: '47390195665')
 User.create!(name:'Bruno Guimarães', email: 'bruno@leilaodogalpao.com.br', password: '123456', cpf: '63430323711')
+first_category = Category.create(name:"Eletrônicos")
+second_category= Category.create(name:"Ferramentas")
+ProductModel.create!(name: 'Tv 32 polegadas', 
+                      description: "TV LED SAMSUNG", 
+                      weight: 8000, width: 90, 
+                      height: 6.3, depth: 6.7, 
+                      category: first_category, 
+                      image_url: 'TVSamsung32.jpg')
+
+ProductModel.create!(name: 'Home Theater JBL', 
+                      description: "JBL Soundbar Cinema", 
+                      weight: 4200, width: 70, 
+                      height: 45, depth: 10, 
+                      category: first_category, 
+                      image_url: 'JBLhome.jpg')
+

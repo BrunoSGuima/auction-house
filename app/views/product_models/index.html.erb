@@ -1,10 +1,8 @@
 <h1> Produtos: </h1>
 
-<%
-=begin%>
- <%= link_to 'Cadastrar Novo', new_product_model_path %> 
-<%
-=end%>
+
+<%= link_to 'Cadastrar Novo', new_product_model_path %> 
+
 
 <% if @product_models.any? %>
 
@@ -13,9 +11,11 @@
       <h2><%= pm.name %></h2>
         <dl>
           <dt>Código:</dt>
-          <dd><%=  pm.code %></dd>
+          <dd><%= link_to pm.code, product_model_path(pm) %></dd>
+          <dt>Descrição:</dt>
+          <dd><%=  pm.description %></dd>
           <dt>Categoria:</dt>
-          <dd><%= pm.category %></dd>
+          <dd><%= pm.category.name %></dd>
         </dl>
     </div>
   <% end %>

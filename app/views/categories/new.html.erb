@@ -1,0 +1,22 @@
+<h1> Nova Categoria: </h1>
+
+<% if(@category.errors.any?) %>
+
+		<p> Verifique os erros abaixo: </p>
+		<ul>
+			<% @category.errors.full_messages.each do |msg| %>
+				<li><%= msg %> </li>
+			<% end %>
+		</ul>
+	<% end %>
+
+<%= form_with(model: @category) do |f| %>
+
+    <div>
+			<%= f.label :name %>
+      <%= f.text_field :name %>
+		</div> <br>
+
+<%= f.submit 'Criar' %>
+
+<% end %>
