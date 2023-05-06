@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :cpf, :name, presence: true
   validates :cpf, uniqueness: true
   validate :cpf_validation
+  has_many :auction_lots
 
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?

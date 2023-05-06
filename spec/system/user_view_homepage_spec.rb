@@ -9,8 +9,9 @@ describe "Usuário visita tela inicial" do
   end
 
   it 'e vê os lotes cadastrados' do
+    user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
     AuctionLot.create!(code: 'A12B34', start_date: 1.day.from_now, limit_date: 3.days.from_now, 
-                            value_min: 100, diff_min: 100, status: 'pending' )
+                            value_min: 100, diff_min: 100, status: 'pending', user: user )
 
     visit root_path
 

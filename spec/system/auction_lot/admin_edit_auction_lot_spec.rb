@@ -6,7 +6,7 @@ describe "Admin edita um galpão" do
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
     AuctionLot.create!(code: 'A12B34', start_date: '07/05/2023' , limit_date: '09/05/2023', 
-      value_min: 100, diff_min: 50, status: 'pending')
+      value_min: 100, diff_min: 50, status: 'pending', user: user)
 
 
     login_as(user)
@@ -28,7 +28,7 @@ describe "Admin edita um galpão" do
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
     AuctionLot.create!(code: 'A12B34', start_date: '07/05/2023' , limit_date: '09/05/2023', 
-      value_min: 100, diff_min: 50, status: 'pending')
+                      value_min: 100, diff_min: 50, status: 'pending', user: user)
 
 
     login_as(user)
@@ -43,7 +43,7 @@ describe "Admin edita um galpão" do
     
 
     expect(page).to  have_content "Lote atualizado com sucesso!"
-    expect(page).to  have_content "Lote A12B34"
+    expect(page).to  have_content "Lote de leilão A12B34"
     expect(page).to  have_content "Valor mínimo do lance: 150"
     expect(page).to  have_content "Data de início: 08/05/2023"
   end
@@ -53,7 +53,7 @@ describe "Admin edita um galpão" do
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
     AuctionLot.create!(code: 'A12B34', start_date: '07/05/2023' , limit_date: '09/05/2023', 
-                        value_min: 100, diff_min: 50, status: 'pending')
+                        value_min: 100, diff_min: 50, status: 'pending', user: user)
 
 
     login_as(user)

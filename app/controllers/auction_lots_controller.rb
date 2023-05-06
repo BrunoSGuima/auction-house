@@ -5,7 +5,8 @@ class AuctionLotsController < ApplicationController
     @auction_lot = AuctionLot.new
   end
 
-  def show; end
+  def show
+  end
   
   def edit; end
 
@@ -20,8 +21,8 @@ class AuctionLotsController < ApplicationController
   end
 
   def create
-    auction_param
     @auction_lot = AuctionLot.new(auction_param)
+    @auction_lot.user = current_user
     if @auction_lot.save
       redirect_to root_path, notice: "Lote cadastrado com sucesso!"
     else

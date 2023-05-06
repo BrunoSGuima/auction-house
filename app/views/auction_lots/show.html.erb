@@ -1,10 +1,20 @@
-<h3>Lote <%= @auction_lot.code %></h3>
+<h3><%= AuctionLot.model_name.human %> <%= @auction_lot.code %></h3>
 
-	<div>
-    	<ul> <strong>Data de início: </strong> <%= I18n.localize (@auction_lot.start_date) %>  ----  <strong> Data limite: </strong> <%= I18n.localize (@auction_lot.limit_date) %> </ul><br>
-    	<ul> Valor mínimo do lance: <%= @auction_lot.value_min %> </ul>
-    	<ul> Diferença mínima entre lances: <%= @auction_lot.diff_min %></ul>
-	</div>
+	<dl>
+    	<dt> <%= AuctionLot.human_attribute_name(:user_id) %> responsável por cadastro:</dt>
+    	<dd><%= @auction_lot.user.admin_desc %> </dd>
+			<dt> <%= AuctionLot.human_attribute_name(:start_date)%></dt>
+    	<dd><%= I18n.localize(@auction_lot.start_date) %>
+			<dt> <%= AuctionLot.human_attribute_name(:limit_date)%></dt>
+    	<dd><%= I18n.localize(@auction_lot.limit_date) %>
+			<dt><%= AuctionLot.human_attribute_name(:value_min) %></dt>
+  		<dd><%= @auction_lot.value_min %></dd>
+  		<dt><%= AuctionLot.human_attribute_name(:diff_min) %></dt>
+  		<dd><%= @auction_lot.diff_min %></dd>
+			<dt> <%= AuctionLot.human_attribute_name(:status) %>:</dt>
+    	<dd><%= I18n.translate(@auction_lot.status) %>
+</dl>
+	
 
 <% if user_signed_in? && current_user.admin? %>
 <%= link_to('Editar', edit_auction_lot_path)%>

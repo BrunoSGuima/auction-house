@@ -5,7 +5,7 @@ describe "Usúario remove um galpão" do
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
     AuctionLot.create!(code: 'A12B34', start_date: '07/05/2023' , limit_date: '09/05/2023', 
-      value_min: 100, diff_min: 50, status: 'pending')
+      value_min: 100, diff_min: 50, status: 'pending', user: user)
 
     login_as(user)
     visit root_path
@@ -22,10 +22,10 @@ describe "Usúario remove um galpão" do
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
     lot = AuctionLot.create!(code: 'A12B34', start_date: '09/05/2023' , limit_date: '11/05/2023', 
-                             value_min: 100, diff_min: 100 )
+                             value_min: 100, diff_min: 100, user: user)
 
     second_lot = AuctionLot.create!(code: 'A2B4C5', start_date: '07/05/2023' , limit_date: '09/05/2023',  
-                                  value_min: 200, diff_min: 50)
+                                  value_min: 200, diff_min: 50, user: user)
 
 
     login_as(user)
