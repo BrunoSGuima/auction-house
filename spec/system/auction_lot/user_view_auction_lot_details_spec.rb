@@ -11,7 +11,7 @@ describe 'Usuário vê detalhes de um galpão' do
 
     expect(page).to have_content 'Data de início: 07/05/2023'
     expect(page).to have_content 'Data limite: 09/05/2023'
-    expect(page).to have_content 'Valor mínimo: 100'
+    expect(page).to have_content 'Valor mínimo do lance: 100'
     expect(page).to have_content 'Diferença mínima entre lances: 50'
 
   end
@@ -39,7 +39,7 @@ describe 'Usuário vê detalhes de um galpão' do
 
     expect(page).to have_content 'Data de início: 07/05/2023'
     expect(page).to have_content 'Data limite: 09/05/2023'
-    expect(page).to have_content 'Valor mínimo: 100'
+    expect(page).to have_content 'Valor mínimo do lance: 100'
     expect(page).to have_content 'Diferença mínima entre lances: 50'
 
   end
