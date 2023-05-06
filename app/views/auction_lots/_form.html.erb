@@ -1,0 +1,31 @@
+<%= form_with(model: @auction_lot) do |f| %>
+    <div>
+      <%= f.label :code %>
+      <%= f.text_field :code %>
+		</div> <br>	
+
+		<div>
+			<%= f.label :start_date %>
+      <%= f.date_field :start_date %>
+		</div> <br>
+		
+		<div>
+			<%= f.label :limit_date %>
+      <%= f.date_field  :limit_date %>
+		</div> <br>
+
+		<div>	
+			<%= f.label :value_min %>
+      <%= f.number_field :value_min %>
+		</div> <br>
+
+		<div>	
+			<%= f.label :diff_min %>
+      <%= f.number_field :diff_min %>
+		</div> <br>
+    
+		<div>
+			<%= f.submit 'Enviar' %>
+		</div>
+
+ <% end %>

@@ -1,2 +1,18 @@
-BEM VINDO AO LEILAO
+  <h2> Lotes: </h2>
 
+  <div>
+    <%= link_to('Cadastrar Lotes', new_auction_lot_path) %>
+  </div>
+  <% @auction_lots.each do |auction| %>
+    <div>
+      <h3>Lote: <%= link_to(auction.code, auction_lot_path(auction.id)) %></h3>
+      <dl>
+        <dt><%= AuctionLot.human_attribute_name(:status) %></dt>
+        <dd><%= I18n.translate(auction.status) %></dd>
+      </dl>
+    </div>
+  <%end %>
+
+  <%if @auction_lots.empty? %>
+    <p>Não existem lotes cadastrados</p>
+  <%end%>

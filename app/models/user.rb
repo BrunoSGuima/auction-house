@@ -16,7 +16,7 @@ class User < ApplicationRecord
   end
 
   def description
-    "#{name} - #{email} - #{role}" 
+    "#{name} - #{email} - #{role.upcase}" 
   end
 
   private

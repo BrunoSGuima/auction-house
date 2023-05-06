@@ -1,7 +1,12 @@
-<h3> Produtos <%= @product_model.name %></h3>
+<h3> Produtos <%= @product_model.name %> - <%= link_to('Editar', edit_product_model_path)%></h3>
 	
   <dl>
-    	<%= image_tag @product_model.image_url%>
+    	<% if @product_model.image_url.present? %>
+  			<%= image_tag @product_model.image_url %>
+			<% else %>
+  			<p>Imagem não disponível</p>
+			<% end %>
+			
 			<dt> Nome: </dt>
     	<dd><%= @product_model.name %> </dd>
       <dt> Descrição: </dt>

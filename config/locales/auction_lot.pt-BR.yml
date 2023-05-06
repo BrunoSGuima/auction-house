@@ -1,0 +1,14 @@
+pt-BR:
+  pending: 'Pendente'
+  approved: 'Aprovado'
+  canceled: 'Cancelado'
+  activerecord:
+    models:
+      auction_lot: 'Lote de leilão'
+    attributes:
+      auction_lot:
+        code: 'Código:'
+        start_date: 'Data de início:'
+        limit_date: 'Data limite:'
+        value_min: 'Valor mínimo do lance:'
+        diff_min: 'Diferença mínima do lance:'

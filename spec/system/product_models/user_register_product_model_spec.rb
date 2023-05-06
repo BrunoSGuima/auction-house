@@ -18,7 +18,7 @@ describe "Admin registra um modelo de produto" do
     fill_in 'Largura', with: 70
     fill_in 'Altura', with: 45
     fill_in 'Profundidade', with: 10
-    find('#product_model_category_id').select('Eletrônicos')
+    select 'Esportes', from: 'product_model_category_id'
     click_on 'Enviar'
     
     
@@ -28,6 +28,21 @@ describe "Admin registra um modelo de produto" do
     expect(page).to have_content 'Descrição: Tv LED Samsung'
     expect(page).to have_content 'Dimensão: 70cm x 45cm x 10cm'
     expect(page).to have_content 'Peso: 8000g'
-    expect(page).to have_content 'Eletrônicos'
+    expect(page).to have_content 'Esportes'
+  end
+
+  it "deve preencher todos os campos" do
+    Category.create!(name: "Eletrônicos")
+    user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
+    
+    login_as(user)
+    visit root_path
+    click_on 'Produtos'
+    click_on 'Cadastrar Novo'
+    fill_in 'Nome', with: ''
+    fill_in 'Descrição', with: ''
+    click_on 'Enviar'
+
+    expect(page).to have_content  'Não foi possível cadastrar o produto'
   end
 end

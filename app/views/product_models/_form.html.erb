@@ -1,0 +1,47 @@
+<%= form_with(model: @product_model) do |f| %>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+		</div> <br>	
+
+    <div>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+		</div> <br>
+
+		<div>
+    <%= f.label :image_url, "Nome do arquivo da imagem" %>
+    <%= f.text_field :image_url %>
+ 	 </div>	<br>
+
+		<div>
+			<%= f.label :weight %>
+      <%= f.number_field :weight %>
+		</div> <br>
+		
+		<div>
+			<%= f.label :width %>
+      <%= f.number_field :width %>
+		</div> <br>
+
+		<div>	
+			<%= f.label :height %>
+      <%= f.number_field :height %>
+		</div> <br>
+
+		<div>	
+			<%= f.label :depth %>
+      <%= f.number_field :depth %>
+		</div>	<br>
+
+		<div>
+		<%= f.label :category, "Categoria" %>
+    <%= f.collection_select :category_id, @categories, :id, :name %>
+  </div>
+		</div>	<br>
+
+		<div>
+			<%= f.submit 'Enviar' %>
+		</div>
+
+ <% end %>

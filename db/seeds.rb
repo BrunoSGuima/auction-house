@@ -23,3 +23,5 @@ ProductModel.create!(name: 'Home Theater JBL',
                       category: first_category, 
                       image_url: 'JBLhome.jpg')
 
+AuctionLot.create(code: 'ABC123', start_date: 1.day.from_now, limit_date: 3.days.from_now, value_min: 100, diff_min: 50, status: 'pending')
+

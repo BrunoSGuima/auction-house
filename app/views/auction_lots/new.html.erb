@@ -1,0 +1,15 @@
+<h2> Novo Lote: </h2>
+
+	<% if(@auction_lot.errors.any?) %>
+
+		<p> Verifique os erros abaixo: </p>
+		<ul>
+			<% @auction_lot.errors.full_messages.each do |msg| %>
+				<li><%= msg %> </li>
+			<% end %>
+		</ul>
+	<% end %>
+
+ <%= render 'form' %>
+
+ <%= link_to('Voltar', root_path)%>

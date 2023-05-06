@@ -8,8 +8,8 @@ RSpec.describe User, type: :model do
 
       result = u.description()
 
-      expect(result).to  eq('Julia Almeida - julia@yahoo.com - user')
-      expect(result).not_to  eq('Julia Almeida - julia@yahoo.com - admin')
+      expect(result).to  eq('Julia Almeida - julia@yahoo.com - USER')
+      expect(result).not_to  eq('Julia Almeida - julia@yahoo.com - ADMIN')
       
     end
 
@@ -19,8 +19,8 @@ RSpec.describe User, type: :model do
 
       result = u.description()
 
-      expect(result).to  eq('Julia do Pão - julia@leilaodogalpao.com.br - admin')
-      expect(result).not_to  eq('Julia do Pão - julia@leilaodogalpao.com.br - user')
+      expect(result).to  eq('Julia do Pão - julia@leilaodogalpao.com.br - ADMIN')
+      expect(result).not_to  eq('Julia do Pão - julia@leilaodogalpao.com.br - USER')
       
     end
     

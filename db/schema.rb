@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_142047) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_06_001823) do
+  create_table "auction_lots", force: :cascade do |t|
+    t.string "code"
+    t.datetime "start_date"
+    t.datetime "limit_date"
+    t.integer "value_min"
+    t.integer "diff_min"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
