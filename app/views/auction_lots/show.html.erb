@@ -1,14 +1,15 @@
 <h3>Lote <%= @auction_lot.code %></h3>
 
 	<div>
-    	<ul> Data de início: <%= @auction_lot.start_date %>  ----  Data limite: <%= @auction_lot.limit_date %> </ul><br>
+    	<ul> <strong>Data de início: </strong> <%= I18n.localize (@auction_lot.start_date) %>  ----  <strong> Data limite: </strong> <%= I18n.localize (@auction_lot.limit_date) %> </ul><br>
     	<ul> Valor mínimo: <%= @auction_lot.value_min %> </ul>
     	<ul> Diferença mínima entre lances: <%= @auction_lot.diff_min %></ul>
 	</div>
 
-
+<% if user_signed_in? && current_user.admin? %>
 <%= link_to('Editar', edit_auction_lot_path)%>
 <%= button_to 'Remover', auction_lot_path, method: :delete %>
+<% end %>
 
 
 <%= link_to('Voltar', root_path)%>

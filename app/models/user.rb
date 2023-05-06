@@ -16,7 +16,11 @@ class User < ApplicationRecord
   end
 
   def description
-    "#{name} - #{email} - #{role.upcase}" 
+    "#{name} - #{email}" 
+  end
+
+  def admin_desc
+    "#{name} - #{email} - #{role.upcase}"
   end
 
   private

@@ -1,8 +1,11 @@
   <h2> Lotes: </h2>
 
+  <% if user_signed_in? && current_user.admin? %>
   <div>
     <%= link_to('Cadastrar Lotes', new_auction_lot_path) %>
   </div>
+  <% end %>
+  
   <% @auction_lots.each do |auction| %>
     <div>
       <h3>Lote: <%= link_to(auction.code, auction_lot_path(auction.id)) %></h3>
