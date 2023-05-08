@@ -1,12 +1,13 @@
-  <h2> Lotes: </h2>
+<h2> Lotes: </h2>
 
   <% if user_signed_in? && current_user.admin? %>
-  <div>
-    <%= link_to('Cadastrar Lotes', new_auction_lot_path) %>
-  </div>
+    <div>
+      <%= link_to('Cadastrar Lotes', new_auction_lot_path) %>
+    </div>
   <% end %>
-  
-  <% @auction_lots.each do |auction| %>
+
+  <h2> Lotes em andamento: </h2>
+  <% @ongoing_auction_lots.each do |auction| %>
     <div>
       <h3>Lote: <%= link_to(auction.code, auction_lot_path(auction.id)) %></h3>
       <dl>
@@ -14,8 +15,25 @@
         <dd><%= I18n.translate(auction.status) %></dd>
       </dl>
     </div>
-  <%end %>
+  <% end %>
 
-  <%if @auction_lots.empty? %>
-    <p>Não existem lotes cadastrados</p>
-  <%end%>
+  <% if @ongoing_auction_lots.empty? %>
+    <p>Não existem lotes em andamento</p>
+  <% end %>
+
+  <h2> Lotes futuros: </h2>
+  <% @future_auction_lots.each do |auction| %>
+    <div>
+      <h3>Lote: <%= link_to(auction.code, auction_lot_path(auction.id)) %></h3>
+      <dl>
+        <dt><%= AuctionLot.human_attribute_name(:status) %></dt>
+        <dd><%= I18n.translate(auction.status) %></dd>
+        <dt>Data de Início:</dt>
+        <dd>Começa em <%= distance_of_time_in_words(Date.today, auction.start_date) %></dd>
+      </dl>
+    </div>
+  <% end %>
+
+  <% if @future_auction_lots.empty? %>
+    <p>Não existem lotes futuros</p>
+  <% end %>

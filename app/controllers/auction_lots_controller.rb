@@ -1,8 +1,22 @@
 class AuctionLotsController < ApplicationController
-  
-  before_action :set_auction, only: [:edit, :update, :show, :destroy]
+  before_action :set_auction, only: [:edit, :update, :show, :destroy, :approve]
+
   def new
     @auction_lot = AuctionLot.new
+  end
+
+  def approve
+    if current_user.admin? && current_user != @auction_lot.user
+      @auction_lot.update(status: 'approved')
+      @auction_approval = AuctionApproval.new(auction_lot: @auction_lot, approved_by: current_user)
+      if @auction_approval.save
+        redirect_to @auction_lot, notice: 'Lote aprovado com sucesso!'
+      else
+        redirect_to @auction_lot, alert: 'Não foi possível aprovar o lote.'
+      end
+    else
+      redirect_to @auction_lot, alert: 'Você não tem permissão para aprovar este lote.'
+    end
   end
 
   def show
@@ -40,7 +54,7 @@ class AuctionLotsController < ApplicationController
       render 'show'
     end
   end
-  
+ 
   private
   def set_auction
     @auction_lot = AuctionLot.find(params[:id])

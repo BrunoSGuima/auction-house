@@ -1,8 +1,9 @@
 pt-BR:
-  aciverecord:
+  activerecord:
     models:
-      user: Usuário
+      user: 'Usuário'
     attributes:
       user:
         name: "Nome"
         cpf: "CPF"
+        user: 'Usuário'

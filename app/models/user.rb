@@ -1,12 +1,11 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :cpf, :name, presence: true
   validates :cpf, uniqueness: true
   validate :cpf_validation
   has_many :auction_lots
+  has_many :auction_approvals, foreign_key: 'approved_by_id', dependent: :nullify
 
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?

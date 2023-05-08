@@ -1,5 +1,6 @@
 pt-BR:
-  pending: 'Pendente'
+  user: 'Usuário'
+  pending: 'Aguardando aprovação'
   approved: 'Aprovado'
   canceled: 'Cancelado'
   activerecord:
@@ -12,4 +13,3 @@ pt-BR:
         limit_date: 'Data limite:'
         value_min: 'Valor mínimo do lance:'
         diff_min: 'Diferença mínima do lance:'
-        user: 'Usuário'

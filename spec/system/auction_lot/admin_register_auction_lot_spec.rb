@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Admin cadastra um galpão" do
+describe "Admin cadastra um lote" do
   it 'a partir da tela inicial' do
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
     
@@ -23,17 +23,17 @@ describe "Admin cadastra um galpão" do
     login_as(user)
     visit root_path
     click_on 'Cadastrar Lotes'
-		fill_in 'Código',	with: 'A12B34'
-		fill_in 'Data de início',	with: '07/05/2023'
-		fill_in 'Data limite',	with: '09/05/2023' 
+		fill_in 'Código',	with: 'A1CB34'
+		fill_in 'Data de início',	with: '11/07/2024'
+		fill_in 'Data limite',	with: '20/07/2024' 
 		fill_in 'Valor mínimo do lance',	with: 100
 		fill_in 'Diferença mínima do lance',	with: 50
 		click_on 'Enviar'
 
 		expect(current_path).to eq root_path
     expect(page).to  have_content 'Lote cadastrado com sucesso!'
-		expect(page).to have_content 'Lote: A12B34'
-    expect(page).to have_content 'Status Pendente'
+		expect(page).to have_content 'Lote: A1CB34'
+    expect(page).to have_content 'Aguardando aprovação'
   end
 
   
@@ -57,6 +57,22 @@ describe "Admin cadastra um galpão" do
     expect(page).to  have_content "Data limite: não pode ficar em branco"
     expect(page).to  have_content "Valor mínimo do lance: não pode ficar em branco"
     expect(page).to  have_content "Diferença mínima do lance: não pode ficar em branco"
+  end
+
+  it 'com sucesso' do
+    user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
+
+    login_as(user)
+    visit root_path
+    click_on 'Cadastrar Lotes'
+		fill_in 'Código',	with: '123456'
+		fill_in 'Data de início',	with: '11/07/2024'
+		fill_in 'Data limite',	with: '20/07/2024' 
+		fill_in 'Valor mínimo do lance',	with: 100
+		fill_in 'Diferença mínima do lance',	with: 50
+		click_on 'Enviar'
+
+		expect(page).to have_content 'o código deve ser composto por 3 letras e 6 caracteres'
   end
   
 end

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_06_150316) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_08_164512) do
+  create_table "auction_approvals", force: :cascade do |t|
+    t.integer "auction_lot_id", null: false
+    t.integer "approved_by_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["approved_by_id"], name: "index_auction_approvals_on_approved_by_id"
+    t.index ["auction_lot_id"], name: "index_auction_approvals_on_auction_lot_id"
+  end
+
   create_table "auction_lots", force: :cascade do |t|
     t.string "code"
     t.datetime "start_date"
@@ -60,6 +69,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_150316) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "auction_approvals", "auction_lots"
+  add_foreign_key "auction_approvals", "users", column: "approved_by_id"
   add_foreign_key "auction_lots", "users"
   add_foreign_key "product_models", "categories"
 end

@@ -1,8 +1,16 @@
-<h3><%= AuctionLot.model_name.human %> <%= @auction_lot.code %></h3>
+<h2><%= AuctionLot.model_name.human %> <%= @auction_lot.code %> - <% if user_signed_in? && current_user.admin? && current_user != @auction_lot.user %>
+  <%= button_to 'Aprovar Lote', approve_auction_lot_path(@auction_lot), method: :patch %> 
+<% end %></h2>
+
+
 
 	<dl>
-    	<dt> <%= AuctionLot.human_attribute_name(:user_id) %> responsável por cadastro:</dt>
-    	<dd><%= @auction_lot.user.admin_desc %> </dd>
+			<% if @auction_lot.auction_approval.present? %>
+  		<dt><strong> Aprovado por: </strong></dt>
+			<dd><%= @auction_lot.auction_approval.approved_by.description %></dd>
+			<% end %>
+    	<dt><strong>Usuário responsável pelo cadastro:</strong></dt>
+    	<dd><%= @auction_lot.user.description %> </dd>
 			<dt> <%= AuctionLot.human_attribute_name(:start_date)%></dt>
     	<dd><%= I18n.localize(@auction_lot.start_date) %>
 			<dt> <%= AuctionLot.human_attribute_name(:limit_date)%></dt>

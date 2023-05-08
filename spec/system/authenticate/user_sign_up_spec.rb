@@ -34,7 +34,7 @@ describe "Usuário se autentica" do
 
     expect(page).not_to  have_content 'maria@email.com'
     expect(page).not_to have_button 'Sair'
-    expect(page).to have_content 'CPF: INVÁLIDO!'
+    expect(page).to have_content 'CPF INVÁLIDO!'
   end 
 end
 
