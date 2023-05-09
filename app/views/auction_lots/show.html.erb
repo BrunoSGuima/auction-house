@@ -21,8 +21,20 @@
   		<dd><%= @auction_lot.diff_min %></dd>
 			<dt> <%= AuctionLot.human_attribute_name(:status) %>:</dt>
     	<dd><%= I18n.translate(@auction_lot.status) %>
-</dl>
-	
+			<dt> Itens do Lote: </dt>
+			<dd> 
+					<% @items.each_pair do |pm, quantity| %>
+					<%= quantity %> x <%= pm.name %> 
+					<% item_product = @auction_lot.item_products.where(product_model: pm).first %>
+					<%= button_to 'Remover Item', auction_lot_auction_item_item_product_path(@auction_lot, pm, item_product), method: :delete %>
+					<br>
+					<% end %>
+			</dd>
+	</dl>
+
+
+
+<%= link_to 'Adicionar Item', new_auction_lot_auction_item_path(auction_lot_id: @auction_lot.id) %><br>
 
 <% if user_signed_in? && current_user.admin? %>
 <%= link_to('Editar', edit_auction_lot_path)%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_08_164512) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_08_231526) do
   create_table "auction_approvals", force: :cascade do |t|
     t.integer "auction_lot_id", null: false
     t.integer "approved_by_id", null: false
@@ -18,6 +18,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_164512) do
     t.datetime "updated_at", null: false
     t.index ["approved_by_id"], name: "index_auction_approvals_on_approved_by_id"
     t.index ["auction_lot_id"], name: "index_auction_approvals_on_auction_lot_id"
+  end
+
+  create_table "auction_items", force: :cascade do |t|
+    t.integer "product_model_id", null: false
+    t.integer "auction_lot_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["auction_lot_id"], name: "index_auction_items_on_auction_lot_id"
+    t.index ["product_model_id"], name: "index_auction_items_on_product_model_id"
   end
 
   create_table "auction_lots", force: :cascade do |t|
@@ -37,6 +47,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_164512) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "item_products", force: :cascade do |t|
+    t.integer "auction_lot_id", null: false
+    t.integer "product_model_id", null: false
+    t.string "serial_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "auction_item_id", null: false
+    t.index ["auction_item_id"], name: "index_item_products_on_auction_item_id"
+    t.index ["auction_lot_id"], name: "index_item_products_on_auction_lot_id"
+    t.index ["product_model_id"], name: "index_item_products_on_product_model_id"
   end
 
   create_table "product_models", force: :cascade do |t|
@@ -71,6 +93,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_164512) do
 
   add_foreign_key "auction_approvals", "auction_lots"
   add_foreign_key "auction_approvals", "users", column: "approved_by_id"
+  add_foreign_key "auction_items", "auction_lots"
+  add_foreign_key "auction_items", "product_models"
   add_foreign_key "auction_lots", "users"
+  add_foreign_key "item_products", "auction_items"
+  add_foreign_key "item_products", "auction_lots"
+  add_foreign_key "item_products", "product_models"
   add_foreign_key "product_models", "categories"
 end

@@ -17,9 +17,12 @@
           <dd><%=  pm.description %></dd>
           <dt>Categoria:</dt>
           <dd><%= pm.category.name %></dd>
+          <dt>Quantidade de produtos disponíveis:</dt>
+          <dd><%= ItemProduct.where(product_model_id: pm.id).count %></dd>
         </dl>
     </div>
   <% end %>
+
 <% else %>
   <p> Nenhum produto cadastrado. </p>
 <% end %>

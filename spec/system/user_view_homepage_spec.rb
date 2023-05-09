@@ -18,14 +18,14 @@ describe "Usuário visita tela inicial" do
     expect(page).not_to have_content 'Não existem lotes cadastrados'
     expect(page).to have_content 'A1CB34'
     expect(page).to have_content 'Aprovado'
-    end
+  end
 
-    it 'e não vê lotes cadastrados' do
+  it 'e não vê lotes cadastrados' do
   
       visit root_path
       expect(page).to have_content 'Lotes em andamento:'
       expect(page).to have_content 'Não existem lotes em andamento'
       expect(page).to have_content 'Lotes futuros:'
       expect(page).to have_content 'Não existem lotes futuros'
-      end
+  end
 end

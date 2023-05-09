@@ -20,6 +20,7 @@ class AuctionLotsController < ApplicationController
   end
 
   def show
+    @items = @auction_lot.item_products.group(:product_model).count
   end
   
   def edit; end
@@ -54,6 +55,7 @@ class AuctionLotsController < ApplicationController
       render 'show'
     end
   end
+
  
   private
   def set_auction
@@ -65,3 +67,4 @@ class AuctionLotsController < ApplicationController
   end 
   
 end
+

@@ -17,6 +17,7 @@
       <% if user_signed_in? && current_user.admin? %>
         <%= link_to 'Nova Categoria', new_category_path %>
       <% end %>
+      
 
         <%= link_to 'Produtos', product_models_path %>
         <% if user_signed_in? %>
