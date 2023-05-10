@@ -1,0 +1,12 @@
+<h2> INSERIR ITENS DISPONÍVEIS: </h2>
+
+<%= form_with(model: [@product]) do |f| %>
+<div>
+			<%= f.label :product_model_id, 'Produto' %>
+			<%= f.collection_select :product_model_id, @products, :id, :name %>
+		</div>
+
+
+<%= f.submit 'Adicionar' %>
+
+<% end %>

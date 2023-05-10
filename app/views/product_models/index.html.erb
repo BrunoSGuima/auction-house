@@ -1,8 +1,11 @@
 <h1> Produtos: </h1>
 
 
-  <% if user_signed_in? && current_user.admin? %>
-    <%= link_to 'Cadastrar Novo', new_product_model_path %>
+  <% if admin_signed_in? %>
+    <%= link_to 'Cadastrar Novo', new_product_model_path %> 
+    <% if ProductModel.exists?  %>
+      | <%= link_to 'Adicionar Item', new_product_path %>
+    <% end %>
   <% end %>
  
 <% if @product_models.any? %>
@@ -17,12 +20,14 @@
           <dd><%=  pm.description %></dd>
           <dt>Categoria:</dt>
           <dd><%= pm.category.name %></dd>
+          <% if user_signed_in? && current_user.admin? %>
           <dt>Quantidade de produtos disponíveis:</dt>
-          <dd><%= ItemProduct.where(product_model_id: pm.id).count %></dd>
+          <dd><%= pm.products_count_in_lots %></dd>
+          <% end %>
         </dl>
     </div>
   <% end %>
-
+  
 <% else %>
   <p> Nenhum produto cadastrado. </p>
 <% end %>

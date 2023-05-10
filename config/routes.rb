@@ -3,13 +3,13 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :auction_lots, only: [:show, :new, :create, :update, :edit, :destroy] do
-    resources :auction_items, only: [:new, :create] do 
-      resources :item_products, only: [:destroy]
-    end
     patch :approve, on: :member
+    post :add_product, on: :member
+    delete :remove_product, on: :member
   end
 
   resources :product_models, only: [:index, :new, :create, :show, :update, :edit]
   resources :categories, only: [:create, :new]
+  resources :products, only: [:create, :new]
 
 end

@@ -2,11 +2,10 @@ class AuctionLot < ApplicationRecord
   validates :code, :start_date, :limit_date, :value_min, :diff_min, presence: true
   validates :code, uniqueness: true
   belongs_to :user
+  has_many :product_models, through: :products
+  has_many :products
   has_one :auction_approval, dependent: :destroy
-  has_many :auction_items
-  has_many :product_models, through: :auction_items
   enum status: {pending: 0, approved: 5, canceled: 9}
-  has_many :item_products
   
   validate :start_date_is_future
   validate :limit_date_after_start
@@ -22,6 +21,7 @@ class AuctionLot < ApplicationRecord
     elsif start_date == Date.today
     end
   end
+
   
   def limit_date_after_start
     if start_date.present? && limit_date.present?  && limit_date < start_date
@@ -35,3 +35,4 @@ class AuctionLot < ApplicationRecord
     end
   end
 end
+

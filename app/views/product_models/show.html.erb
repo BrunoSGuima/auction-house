@@ -1,4 +1,4 @@
-<h3> Produtos <%= @product_model.name %> - <%= link_to('Editar', edit_product_model_path)%></h3>
+<h3><%= @product_model.name %>  <% if admin_signed_in? %> <%= link_to('Editar', edit_product_model_path)%><% end %></h3>
 	
   <dl>
     	<% if @product_model.image_url.present? %>

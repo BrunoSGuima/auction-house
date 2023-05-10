@@ -1,4 +1,4 @@
-<h2><%= AuctionLot.model_name.human %> <%= @auction_lot.code %> - <% if user_signed_in? && current_user.admin? && current_user != @auction_lot.user %>
+<h2><%= AuctionLot.model_name.human %> <%= @auction_lot.code %> - <% if admin_signed_in? && current_user != @auction_lot.user && @auction_lot.status != 'approved' %>
   <%= button_to 'Aprovar Lote', approve_auction_lot_path(@auction_lot), method: :patch %> 
 <% end %></h2>
 
@@ -20,23 +20,34 @@
   		<dt><%= AuctionLot.human_attribute_name(:diff_min) %></dt>
   		<dd><%= @auction_lot.diff_min %></dd>
 			<dt> <%= AuctionLot.human_attribute_name(:status) %>:</dt>
-    	<dd><%= I18n.translate(@auction_lot.status) %>
-			<dt> Itens do Lote: </dt>
-			<dd> 
-					<% @items.each_pair do |pm, quantity| %>
-					<%= quantity %> x <%= pm.name %> 
-					<% item_product = @auction_lot.item_products.where(product_model: pm).first %>
-					<%= button_to 'Remover Item', auction_lot_auction_item_item_product_path(@auction_lot, pm, item_product), method: :delete %>
-					<br>
-					<% end %>
-			</dd>
-	</dl>
+    	<dd><%= I18n.translate(@auction_lot.status) %></dd>
+			<dt> Itens no lote:</dt>
+    	<dd><% @items.each_pair do |pm, count| %>
+      <%= pm.name %> - Quantidade: <%= count %><br>
+  		<% end %></dd>
+		</dl>
+	<% if admin_signed_in? %>
+		<%= form_with url: add_product_auction_lot_path(@auction_lot), method: :post do |f| %>
+			<div>
+				<%= f.label :product_id, 'Produto' %>
+				<%= f.collection_select :product_id, Product.where(auction_lot_id: nil), :id, proc { |product| "#{product.product_model.name} - ID: #{product.id}" }, include_blank: true %>
+			</div>
+			<%= f.submit 'Adicionar Produto' %>
+		<% end %>
+		<% @auction_lot.products.each do |product| %>
+			<div class="product">
+				<%= "#{product.product_model.name} - ID: #{product.id}" %>
+				<%= button_to 'Remover Produto', remove_product_auction_lot_path(@auction_lot, product_id: product.id), method: :delete %> 
+			</div>
+		<% end %>
+				
+		
+	<% end %>
 
+<br>
+<br>
 
-
-<%= link_to 'Adicionar Item', new_auction_lot_auction_item_path(auction_lot_id: @auction_lot.id) %><br>
-
-<% if user_signed_in? && current_user.admin? %>
+<% if admin_signed_in? %>
 <%= link_to('Editar', edit_auction_lot_path)%>
 <%= button_to 'Remover', auction_lot_path, method: :delete %>
 <% end %>

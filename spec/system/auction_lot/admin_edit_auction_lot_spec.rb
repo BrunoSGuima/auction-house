@@ -37,7 +37,7 @@ describe "Admin edita um galpão" do
     click_on 'Editar'
 
     fill_in "Valor mínimo do lance",	with: '150'
-    fill_in 'Data de início',	with: '08/05/2023'
+    fill_in 'Data de início',	with: '08/05/2024'
     fill_in 'Diferença mínima do lance',	with: '100'
     click_on 'Enviar'
     
@@ -45,7 +45,7 @@ describe "Admin edita um galpão" do
     expect(page).to  have_content "Lote atualizado com sucesso!"
     expect(page).to  have_content "Lote de leilão A1CB34"
     expect(page).to  have_content "Valor mínimo do lance: 150"
-    expect(page).to  have_content "Data de início: 08/05/2023"
+    expect(page).to  have_content "Data de início: 08/05/2024"
   end
 
   it "mantém os campos obrigatórios" do

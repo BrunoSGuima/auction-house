@@ -1,6 +1,4 @@
-<h2> Lotes: </h2>
-
-  <% if user_signed_in? && current_user.admin? %>
+  <% if admin_signed_in? %>
     <div>
       <%= link_to('Cadastrar Lotes', new_auction_lot_path) %>
     </div>
