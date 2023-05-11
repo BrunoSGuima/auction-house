@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     patch :close_or_cancel, on: :member
     post :add_product, on: :member
     delete :remove_product, on: :member
+    get :expired, on: :collection
+    get :winner, on: :collection
   end
 
   resources :product_models, only: [:index, :new, :create, :show, :update, :edit]

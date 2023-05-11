@@ -1,0 +1,28 @@
+<h1>Lotes Expirados:</h1>
+
+<% @expired_auction_lots.each do |auction_lot| %>
+  <div>
+    <h2><%= link_to auction_lot.code %></h2> 
+    <% if auction_lot.bids.exists? %>
+      <% highest_bid = auction_lot.bids.order(amount: :desc).first %>
+      <p>Valor do maior lance: <%= highest_bid.amount %></p>
+      <p>Usuário que fez o maior lance: <%= highest_bid.user.name %></p>
+    <% else %>
+      <p>Nenhum lance foi feito para este lote.</p>
+    <% end %>
+    <%= button_to 'Encerrar/cancelar lote', close_or_cancel_auction_lot_path(auction_lot), method: :patch %>
+  </div>
+<% end %>
+
+<h2>Lotes Cancelados ou Fechados:</h2>
+
+<% @canceled_closed_auction_lots.each do |auction_lot| %>
+  <% if auction_lot.canceled? %>
+    <h3><%= link_to "#{auction_lot.code}", auction_lot_path(auction_lot.id) %> | Cancelado</h3>
+  <% elsif auction_lot.closed? %>
+    <h3><%= link_to "#{auction_lot.code}", auction_lot_path(auction_lot.id) %> | Fechado </h3>
+  <% end %>
+<% end %>
+
+
+

@@ -16,19 +16,19 @@
     <nav>
       <% if admin_signed_in? %>
         <%= link_to 'Nova Categoria', new_category_path %> |
+        <%= link_to 'Lotes Expirados', expired_auction_lots_path %> |
       <% end %>
       
-
-        <%= link_to 'Produtos', product_models_path %>
+        <%= link_to 'Produtos', product_models_path %> |
         <% if user_signed_in? %>
           <% if current_user.admin? %>
             <%= current_user.admin_desc %>
           <% else %>
+          <%= link_to 'Lotes Vencedores', winner_auction_lots_path %>
             <%= current_user.description %>
           <% end %>
         <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
       <% else %>
-        
         <%= link_to 'Entrar', new_user_session_path %>
       <% end %>
     </nav>

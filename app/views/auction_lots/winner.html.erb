@@ -1,0 +1,13 @@
+<h1>Lotes Vencedores</h1>
+
+<% @closed_auction_lots.each do |auction_lot| %>
+<% highest_bid = auction_lot.bids.order(amount: :desc).first %>
+  <div>
+    <h3><%= link_to "#{auction_lot.code}",  auction_lot_path(auction_lot.id) %> | <% if current_user && current_user == highest_bid.user %>
+        <Strong> Parabéns! Você é o vencedor deste lote! </Strong>
+      <% end %> </h3>
+      <p>Valor do maior lance: <%= highest_bid.amount %></p>
+      <p>Usuário vencedor: <%= highest_bid.user.name %></p>
+    <% end %>
+  </div>
+

@@ -3,6 +3,8 @@ pt-BR:
   pending: 'Aguardando aprovação'
   approved: 'Aprovado'
   canceled: 'Cancelado'
+  expired: 'Expirado'
+  closed: "Fechado"
   activerecord:
     models:
       auction_lot: 'Lote de leilão'

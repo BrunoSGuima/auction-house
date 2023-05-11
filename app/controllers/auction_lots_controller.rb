@@ -19,6 +19,10 @@ class AuctionLotsController < ApplicationController
     end
   end
   
+  def winner
+    @closed_auction_lots = AuctionLot.where(status: AuctionLot.statuses[:closed])
+  end
+  
 
   def show
     @items = @auction_lot.products.group(:product_model).count
@@ -61,11 +65,16 @@ class AuctionLotsController < ApplicationController
 
   def add_product
     @auction_lot = AuctionLot.find(params[:id])
-    @product = Product.find(params[:product_id])
-    if @product.update(auction_lot_id: @auction_lot.id)
-      redirect_to @auction_lot,  notice: 'Produto adicionado com sucesso.'
+    product_id = params[:product_id]
+    if product_id.present?
+      @product = Product.find(product_id)
+      if @product.update(auction_lot_id: @auction_lot.id)
+        redirect_to @auction_lot,  notice: 'Produto adicionado com sucesso.'
+      else
+        redirect_to @auction_lot, notice: 'Produto já existe em outro lote.'
+      end
     else
-      redirect_to @auction_lot, notice: 'Produto já existe em outro lote.'
+      redirect_to @auction_lot, alert: 'Selecione um produto válido para adicionar.'
     end
   end
 
@@ -82,14 +91,17 @@ class AuctionLotsController < ApplicationController
   def close_or_cancel
     @auction_lot = AuctionLot.find(params[:id])
     if @auction_lot.bids.count > 0
-        @auction_lot.update(status: :closed)
+        @auction_lot.update!(status: :closed)
     else
-        @auction_lot.update(status: :cancelled)
+        @auction_lot.update!(status: :canceled)
     end
-    redirect_to admin_auction_lot_path(@auction_lot)
+    redirect_to expired_auction_lots_path
   end
 
-  
+  def expired
+    @expired_auction_lots = AuctionLot.where(status: AuctionLot.statuses[:expired])
+    @canceled_closed_auction_lots = AuctionLot.where(status: [AuctionLot.statuses[:canceled], AuctionLot.statuses[:closed]])
+  end
 
  
   private

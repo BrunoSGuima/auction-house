@@ -6,9 +6,9 @@ class AuctionLot < ApplicationRecord
   has_many :products
   has_many :bids
   has_one :auction_approval, dependent: :destroy
-  enum status: {pending: 0, approved: 5, expired: 9, closed: 10, cancelled: 15}
+  enum status: {pending: 0, approved: 5, expired: 9, closed: 10, canceled: 15}
   
-  validate :start_date_is_future
+  validate :start_date_is_future, on: :create
   validate :limit_date_after_start
   validate :code_format
 
@@ -21,7 +21,7 @@ class AuctionLot < ApplicationRecord
   end
 
   def self.expire_lots
-    where("limit_date < ?", Date.today).where.not(status: statuses[:expired]).update_all(status: statuses[:expired])
+    where("limit_date < ?", Date.today).where.not(status: [statuses[:expired], statuses[:canceled], statuses[:closed]]).update_all(status: statuses[:expired])
   end
   
   def approve_by(user)
