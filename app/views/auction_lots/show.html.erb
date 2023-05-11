@@ -1,6 +1,17 @@
 <h2><%= AuctionLot.model_name.human %> <%= @auction_lot.code %> - <% if admin_signed_in? && current_user != @auction_lot.user && @auction_lot.status != 'approved' %>
   <%= button_to 'Aprovar Lote', approve_auction_lot_path(@auction_lot), method: :patch %> 
-<% end %></h2>
+<% end %> <% if @auction_lot.expired? %><%= link_to 'Encerrar/cancelar lote', close_or_cancel_auction_lot_path(@auction_lot), method: :patch %><% end %>
+</h2>
+
+		<%= link_to 'Ver Lances', auction_lot_bids_path(@auction_lot) %> - <strong> O maior lance atual: <%= @highest_bid %></strong>
+		<br>
+		<br>
+		<%= form_for [@auction_lot, Bid.new] do |f| %>
+			<%= f.label :amount %>
+			<%= f.number_field :amount, step: 1 %>
+			<%= f.submit %>
+		<% end %>
+
 
 
 
@@ -23,7 +34,7 @@
     	<dd><%= I18n.translate(@auction_lot.status) %></dd>
 			<dt> Itens no lote:</dt>
     	<dd><% @items.each_pair do |pm, count| %>
-      <%= pm.name %> - Quantidade: <%= count %><br>
+      <%= link_to pm.name, product_model_path %> - Quantidade: <%= count %><br>
   		<% end %></dd>
 		</dl>
 	<% if admin_signed_in? %>

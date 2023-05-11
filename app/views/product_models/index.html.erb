@@ -8,7 +8,7 @@
     <% end %>
   <% end %>
  
-<% if @product_models.any? %>
+  <% if @product_models.any? %>
 
   <% @product_models.each do |pm| %>
     <div>
@@ -20,7 +20,7 @@
           <dd><%=  pm.description %></dd>
           <dt>Categoria:</dt>
           <dd><%= pm.category.name %></dd>
-          <% if user_signed_in? && current_user.admin? %>
+          <% if admin_signed_in? %>
           <dt>Quantidade de produtos disponíveis:</dt>
           <dd><%= pm.products_count_in_lots %></dd>
           <% end %>
@@ -28,6 +28,8 @@
     </div>
   <% end %>
   
-<% else %>
-  <p> Nenhum produto cadastrado. </p>
-<% end %>
+  <% else %>
+    <p> Nenhum produto cadastrado. </p>
+  <% end %>
+
+<%= link_to('Voltar', root_path) %>

@@ -9,7 +9,7 @@ describe "Admin adiciona novos itens disponiveis" do
                               category: category)
     second_pm = ProductModel.create!(name: 'Tv 50', description: 'TV Samsung de 50 polegadas', weight: 9000, width: 80, height: 55, depth: 20, 
                                 category: category)
-    auction = AuctionLot.create!(code: 'A1CB34', start_date: '20/06/2024' , limit_date: '29/06/2024', 
+    auction = AuctionLot.create!(code: 'A1CB34', start_date: 1.week.from_now, limit_date: 2.weeks.from_now, 
                           value_min: 100, diff_min: 50, status: 'pending', user: user)
 
     login_as(user)

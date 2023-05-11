@@ -5,7 +5,7 @@ RSpec.describe AuctionLot, type: :model do
     context "presence" do      
     
       it "falso quando o código está em branco" do
-        lot = AuctionLot.new(code: '', start_date: '07/05/2024' , limit_date: '09/05/2024', 
+        lot = AuctionLot.new(code: '', start_date: 1.week.from_now , limit_date: 2.weeks.from_now, 
         value_min: 100, diff_min: 50 )
 
         result = lot.valid?
@@ -14,7 +14,7 @@ RSpec.describe AuctionLot, type: :model do
       end
 
       it "falso quando o start_date está em branco" do
-       lot = AuctionLot.new(code: 'A1CB34', start_date: '' , limit_date: '09/05/2024', 
+       lot = AuctionLot.new(code: 'A1CB34', start_date: '' , limit_date: 2.weeks.from_now, 
         value_min: 100, diff_min: 50 )
 
         result = lot.valid?
@@ -23,7 +23,7 @@ RSpec.describe AuctionLot, type: :model do
       end
       
       it "falso quando o limit_date está em branco" do
-        lot = AuctionLot.new(code: 'A1CB34', start_date: '07/05/2024' , limit_date: '', 
+        lot = AuctionLot.new(code: 'A1CB34', start_date: 1.week.from_now , limit_date: '', 
         value_min: 100, diff_min: 50)
 
         result = lot.valid?
@@ -32,7 +32,7 @@ RSpec.describe AuctionLot, type: :model do
       end
 
       it "falso quando o value_min está em branco" do
-        lot = AuctionLot.new(code: 'A1CB34', start_date: '07/05/2024' , limit_date: '09/05/2024', 
+        lot = AuctionLot.new(code: 'A1CB34', start_date: 1.week.from_now , limit_date: 2.weeks.from_now, 
         value_min: '', diff_min: 50 )
 
         result = lot.valid?
@@ -41,7 +41,7 @@ RSpec.describe AuctionLot, type: :model do
       end
       
       it "falso quando o diff_min está em branco" do
-        lot = AuctionLot.new(code: 'A1CB34', start_date: '07/05/2024' , limit_date: '09/05/2024', 
+        lot = AuctionLot.new(code: 'A1CB34', start_date: 1.week.from_now , limit_date: 2.weeks.from_now, 
           value_min: 100, diff_min: '' )
 
         result = lot.valid?
@@ -49,8 +49,8 @@ RSpec.describe AuctionLot, type: :model do
       end
 
       it "data de inicio do lote não deve ser passada" do
-        lot = AuctionLot.new(code: 'ABC123', start_date: 1.day.ago)
-        
+        lot = AuctionLot.new(code: 'ABC123', start_date: Date.yesterday, limit_date: Date.today + 5.days, value_min: 100, diff_min: 10)
+          
         lot.valid?
         result = lot.errors.include?(:start_date)
   
@@ -81,10 +81,10 @@ RSpec.describe AuctionLot, type: :model do
 
     it "o código é unico" do
       user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
-      lot = AuctionLot.create!(code: 'A1CB34', start_date: '09/05/2024' , limit_date: '11/05/2024', 
+      lot = AuctionLot.create!(code: 'A1CB34', start_date: 1.week.from_now , limit_date: 2.weeks.from_now, 
                               value_min: 100, diff_min: 100, user: user)
 
-      second_lot = AuctionLot.new(code: 'A1CB34', start_date: '07/05/2024' , limit_date: '09/05/2024', 
+      second_lot = AuctionLot.new(code: 'A1CB34', start_date: 1.week.from_now , limit_date: 2.weeks.from_now, 
                                     value_min: 200, diff_min: 50)
 
 
@@ -93,7 +93,7 @@ RSpec.describe AuctionLot, type: :model do
     
     it "e não deve ser modificado" do
       user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
-      lot = AuctionLot.create!(code: 'A1CB34', start_date: '09/05/2024' , limit_date: '11/05/2024', 
+      lot = AuctionLot.create!(code: 'A1CB34', start_date: 1.week.from_now , limit_date: 2.weeks.from_now, 
                               value_min: 100, diff_min: 100, user: user)
       original_code = lot.code
 

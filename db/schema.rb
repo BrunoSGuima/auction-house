@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_10_014745) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_10_230841) do
   create_table "auction_approvals", force: :cascade do |t|
     t.integer "auction_lot_id", null: false
     t.integer "approved_by_id", null: false
@@ -31,6 +31,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_10_014745) do
     t.integer "status", default: 0
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_auction_lots_on_user_id"
+  end
+
+  create_table "bids", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "auction_lot_id", null: false
+    t.decimal "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["auction_lot_id"], name: "index_bids_on_auction_lot_id"
+    t.index ["user_id"], name: "index_bids_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -82,6 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_10_014745) do
   add_foreign_key "auction_approvals", "auction_lots"
   add_foreign_key "auction_approvals", "users", column: "approved_by_id"
   add_foreign_key "auction_lots", "users"
+  add_foreign_key "bids", "auction_lots"
+  add_foreign_key "bids", "users"
   add_foreign_key "product_models", "categories"
   add_foreign_key "products", "auction_lots"
   add_foreign_key "products", "product_models"

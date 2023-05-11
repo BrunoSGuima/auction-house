@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      bid: 'Lance'
+    attributes:
+      bid:
+        amount: 'Valor total'
+        start_date: 'Data de início:'
+        limit_date: 'Data limite:'
+        value_min: 'Valor mínimo do lance:'
+        diff_min: 'Diferença mínima do lance:'
+        

@@ -5,7 +5,7 @@ describe "Admin edita um galpão" do
   it "a partir da página de detalhes" do
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
-    AuctionLot.create!(code: 'A1CB34', start_date: '11/07/2024' , limit_date: '20/08/2024', 
+    AuctionLot.create!(code: 'A1CB34', start_date: 2.weeks.from_now, limit_date: 3.weeks.from_now, 
       value_min: 100, diff_min: 50, status: 'pending', user: user)
 
 
@@ -27,7 +27,7 @@ describe "Admin edita um galpão" do
 
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
-    AuctionLot.create!(code: 'A1CB34', start_date: '11/07/2024' , limit_date: '20/08/2024', 
+    AuctionLot.create!(code: 'A1CB34', start_date: '10/10/2050' , limit_date: '10/11/2050', 
                       value_min: 100, diff_min: 50, status: 'pending', user: user)
 
 
@@ -37,7 +37,7 @@ describe "Admin edita um galpão" do
     click_on 'Editar'
 
     fill_in "Valor mínimo do lance",	with: '150'
-    fill_in 'Data de início',	with: '08/05/2024'
+    fill_in 'Data de início',	with: '10/10/2050'
     fill_in 'Diferença mínima do lance',	with: '100'
     click_on 'Enviar'
     
@@ -45,14 +45,14 @@ describe "Admin edita um galpão" do
     expect(page).to  have_content "Lote atualizado com sucesso!"
     expect(page).to  have_content "Lote de leilão A1CB34"
     expect(page).to  have_content "Valor mínimo do lance: 150"
-    expect(page).to  have_content "Data de início: 08/05/2024"
+    expect(page).to  have_content "Data de início: 10/10/2050"
   end
 
   it "mantém os campos obrigatórios" do
 
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
-    AuctionLot.create!(code: 'A1CB34', start_date: '11/07/2024' , limit_date: '20/08/2024', 
+    AuctionLot.create!(code: 'A1CB34', start_date: 2.weeks.from_now, limit_date: 3.weeks.from_now, 
                         value_min: 100, diff_min: 50, status: 'pending', user: user)
 
 

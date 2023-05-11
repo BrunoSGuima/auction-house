@@ -4,7 +4,7 @@ describe "Admin remove um galpão" do
   it "com sucesso" do
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
-    AuctionLot.create!(code: 'A1CB34', start_date: '11/07/2024' , limit_date: '20/07/2024', 
+    AuctionLot.create!(code: 'A1CB34', start_date: 2.weeks.from_now , limit_date: 3.weeks.from_now, 
       value_min: 100, diff_min: 50, status: 'pending', user: user)
 
     login_as(user)
@@ -21,10 +21,10 @@ describe "Admin remove um galpão" do
   it "com sucesso" do
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
-    lot = AuctionLot.create!(code: 'A1CB34', start_date: '11/07/2024' , limit_date: '20/07/2024', 
+    lot = AuctionLot.create!(code: 'A1CB34', start_date: 2.weeks.from_now , limit_date: 3.weeks.from_now, 
                              value_min: 100, diff_min: 100, user: user)
 
-    second_lot = AuctionLot.create!(code: 'A2B4C5', start_date: '21/07/2024' , limit_date: '19/08/2024',  
+    second_lot = AuctionLot.create!(code: 'A2B4C5', start_date: 2.weeks.from_now , limit_date: 3.weeks.from_now,  
                                   value_min: 200, diff_min: 50, user: user)
 
 

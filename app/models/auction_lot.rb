@@ -4,15 +4,31 @@ class AuctionLot < ApplicationRecord
   belongs_to :user
   has_many :product_models, through: :products
   has_many :products
+  has_many :bids
   has_one :auction_approval, dependent: :destroy
-  enum status: {pending: 0, approved: 5, canceled: 9}
+  enum status: {pending: 0, approved: 5, expired: 9, closed: 10, cancelled: 15}
   
   validate :start_date_is_future
   validate :limit_date_after_start
   validate :code_format
 
+  def minimum_bid
+    if bids.any?
+      bids.maximum(:amount).to_i + diff_min
+    else
+      value_min
+    end
+  end
 
-
+  def self.expire_lots
+    where("limit_date < ?", Date.today).where.not(status: statuses[:expired]).update_all(status: statuses[:expired])
+  end
+  
+  def approve_by(user)
+    update(status: 'approved')
+    auction_approval = AuctionApproval.new(auction_lot: self, approved_by: user)
+    auction_approval.save
+  end
 
   private
   def start_date_is_future

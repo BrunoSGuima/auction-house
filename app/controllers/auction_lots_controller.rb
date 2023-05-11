@@ -1,6 +1,7 @@
 class AuctionLotsController < ApplicationController
   before_action :check_status, only: [:remove_product, :add_product]
   before_action :set_auction, only: [:edit, :update, :show, :destroy, :approve, :remove_product, :add_product]
+  before_action :expire_lots, only: [:show, :edit, :update]
  
   def new
     @auction_lot = AuctionLot.new
@@ -8,9 +9,7 @@ class AuctionLotsController < ApplicationController
 
   def approve
     if current_user.admin? && current_user != @auction_lot.user
-      @auction_lot.update(status: 'approved')
-      @auction_approval = AuctionApproval.new(auction_lot: @auction_lot, approved_by: current_user)
-      if @auction_approval.save
+      if @auction_lot.approve_by(current_user)
         redirect_to @auction_lot, notice: 'Lote aprovado com sucesso!'
       else
         redirect_to @auction_lot, alert: 'Não foi possível aprovar o lote.'
@@ -19,9 +18,11 @@ class AuctionLotsController < ApplicationController
       redirect_to @auction_lot, alert: 'Você não tem permissão para aprovar este lote.'
     end
   end
+  
 
   def show
     @items = @auction_lot.products.group(:product_model).count
+    @highest_bid = @auction_lot.bids.maximum(:amount)
   end
   
   def edit; end
@@ -77,12 +78,24 @@ class AuctionLotsController < ApplicationController
       redirect_to @auction_lot, notice: 'Não foi possível remover o produto.'
     end
   end
-  
-  
 
+  def close_or_cancel
+    @auction_lot = AuctionLot.find(params[:id])
+    if @auction_lot.bids.count > 0
+        @auction_lot.update(status: :closed)
+    else
+        @auction_lot.update(status: :cancelled)
+    end
+    redirect_to admin_auction_lot_path(@auction_lot)
+  end
+
+  
 
  
   private
+  def expire_lots
+    AuctionLot.expire_lots
+  end
 
   def check_status
     @auction_lot = AuctionLot.find(params[:id])

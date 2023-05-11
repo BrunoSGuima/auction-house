@@ -8,8 +8,8 @@ describe "Admin cadastra um lote" do
     visit root_path
     click_on 'Cadastrar Lotes'
 		fill_in 'Código',	with: 'A1CB34'
-		fill_in 'Data de início',	with: '11/07/2024'
-		fill_in 'Data limite',	with: '20/07/2024' 
+		fill_in 'Data de início',	with: '11/07/2040'
+		fill_in 'Data limite',	with: '20/07/2040' 
 		fill_in 'Valor mínimo do lance',	with: 100
 		fill_in 'Diferença mínima do lance',	with: 50
 		click_on 'Enviar'
@@ -28,8 +28,8 @@ describe "Admin cadastra um lote" do
     visit root_path
     click_on 'Cadastrar Lotes'
 		fill_in 'Código',	with: 'A1CB34'
-		fill_in 'Data de início',	with: '11/07/2024'
-		fill_in 'Data limite',	with: '20/07/2024' 
+		fill_in 'Data de início',	with: '11/07/2040'
+		fill_in 'Data limite',	with: '20/07/2040' 
 		fill_in 'Valor mínimo do lance',	with: 100
 		fill_in 'Diferença mínima do lance',	with: 50
 		click_on 'Enviar'
@@ -48,8 +48,8 @@ describe "Admin cadastra um lote" do
     visit root_path
     click_on 'Cadastrar Lotes'
 		fill_in 'Código',	with: 'A1CB34'
-		fill_in 'Data de início',	with: '11/07/2024'
-		fill_in 'Data limite',	with: '20/07/2024' 
+		fill_in 'Data de início',	with: '11/07/2040'
+		fill_in 'Data limite',	with: '20/07/2040' 
 		fill_in 'Valor mínimo do lance',	with: 100
 		fill_in 'Diferença mínima do lance',	with: 50
 		click_on 'Enviar'
@@ -71,8 +71,8 @@ describe "Admin cadastra um lote" do
     visit root_path
     click_on 'Cadastrar Lotes'
 		fill_in 'Código',	with: 'A1CB34'
-		fill_in 'Data de início',	with: '11/07/2024'
-		fill_in 'Data limite',	with: '20/07/2024' 
+		fill_in 'Data de início',	with: '11/07/2040'
+		fill_in 'Data limite',	with: '20/07/2040' 
 		fill_in 'Valor mínimo do lance',	with: 100
 		fill_in 'Diferença mínima do lance',	with: 50
 		click_on 'Enviar'
