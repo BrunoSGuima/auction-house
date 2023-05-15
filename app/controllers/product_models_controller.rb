@@ -1,6 +1,7 @@
 class ProductModelsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :authorize_admin, only: [:new, :create, :edit, :update]
+  before_action :set_product_model, only: [:show, :edit, :update]
   
   def index
     @product_models = ProductModel.all
@@ -23,11 +24,9 @@ class ProductModelsController < ApplicationController
   end
 
   def show
-    @product_model = ProductModel.find(params[:id])
   end
 
   def edit
-    @product_model = ProductModel.find(params[:id])
     @categories = Category.all
   end
 
@@ -36,6 +35,7 @@ class ProductModelsController < ApplicationController
       if @product_model.update(product_model_params)
         redirect_to @product_model, notice: "Produto atualizado com sucesso!"
       else
+        @categories = Category.all
         flash[:notice] = "Não foi possível atualizar o Produto."
         render 'edit'
       end
@@ -43,10 +43,9 @@ class ProductModelsController < ApplicationController
   
 
   private
-  def authorize_admin
-    if current_user.role != "admin"
-      redirect_to root_path, alert: "Permissão negada"
-    end
+
+  def set_product_model
+    @product_model = ProductModel.find(params[:id])
   end
 
   def product_model_params

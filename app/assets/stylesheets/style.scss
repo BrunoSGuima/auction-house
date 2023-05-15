@@ -1,0 +1,63 @@
+.card-body {
+  border-radius: 5px;
+  background-color: lightgray;
+  color: black
+}
+
+
+.custom-container {
+  max-width: 95%;
+}
+body {
+  background-color: #484848;
+  color: #fff;
+}
+
+
+
+#myImage {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-image: url(asset-path('icone.jpg'));
+  background-size: cover;
+  z-index: 10;
+}
+
+
+.centered-text {
+  text-align: center;
+}
+
+.ml-2 {
+  margin-left: 8rem;
+  color: red;
+}
+
+.navbar .navbar-nav .nav-link { color: #fff; }
+.navbar .navbar-nav .nav-link:hover { color: #fbc531; }
+
+
+
+.header-container {
+  color: rgb(188, 187, 187)
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.nav-description {
+  margin-left: 10px;
+  padding:4px;
+}
+
+.btn-custom {
+  padding-top: 3px; 
+  padding-bottom: 3px; 
+}
+

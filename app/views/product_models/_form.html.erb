@@ -10,11 +10,6 @@
 		</div> <br>
 
 		<div>
-    <%= f.label :image_url, "Nome do arquivo da imagem" %>
-    <%= f.text_field :image_url %>
- 	 </div>	<br>
-
-		<div>
 			<%= f.label :weight %>
       <%= f.number_field :weight %>
 		</div> <br>
@@ -36,7 +31,7 @@
 		<div>
 
 		<div>
-		<%= f.label :category, "Categoria" %>
+		<%= f.label :category %>
     <%= f.collection_select :category_id, @categories, :id, :name %>
   	</div><br>
 		

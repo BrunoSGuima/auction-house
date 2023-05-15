@@ -6,4 +6,11 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :cpf, :role])
   end
+
+  def authorize_admin
+    if current_user.role != "admin"
+      redirect_to root_path, alert: "Permissão negada"
+    end
+  end
 end
+

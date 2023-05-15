@@ -1,0 +1,52 @@
+  <header>
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <%
+=begin%>
+ <%= link_to root_path, class: "navbar-brand text-white" do %>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nvbCollapse" aria-controls="nvbCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nvbCollapse"> 
+<%
+=end%>
+      <ul class="navbar-nav ml-auto">
+        <% if admin_signed_in? %>
+          <li class="nav-item pl-1">
+            <%= link_to 'Categorias', categories_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item pl-1">
+            <%= link_to 'Lotes Expirados', expired_auction_lots_path, class: "nav-link" %>
+          </li>
+        <% end %>
+        <li class="nav-item pl-1">
+          <%= link_to 'Produtos', product_models_path, class: "nav-link" %>
+        </li>
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= current_user.admin_desc %>
+            </li>
+          <% else %>
+            <li class="nav-item pl-1">
+              <%= link_to 'Lotes Vencedores', winner_auction_lots_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= current_user.description %>
+            </li>
+          <% end %>
+          <li class="nav-description">
+            <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'nav-link btn btn-danger btn-custom' %>
+          </li>
+        <% else %>
+          <li class="nav-item pl-1">
+            <%= link_to 'Entrar', new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	</header>

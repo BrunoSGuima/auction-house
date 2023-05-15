@@ -1,39 +1,49 @@
-  <% if admin_signed_in? %>
-    <div>
-      <%= link_to('Cadastrar Lotes', new_auction_lot_path) %>
-    </div>
-  <% end %>
+<% if admin_signed_in? %>
+  <div class="mb-3">
+    <%= link_to 'Cadastrar Lotes', new_auction_lot_path, class: "btn btn-primary" %>
+  </div>
+<% end %>
 
-
-
-  <h2> Lotes em andamento: </h2>
+<h2 class="mb-3"> Lotes em andamento: </h2>
+<div class="row">
   <% @ongoing_auction_lots.each do |auction| %>
-    <div>
-      <h3>Lote: <%= link_to(auction.code, auction_lot_path(auction.id)) %></h3>
-      <dl>
-        <dt><%= AuctionLot.human_attribute_name(:status) %></dt>
-        <dd><%= I18n.translate(auction.status) %></dd>
-      </dl>
+    <div class="col-lg-4 mb-4">
+      <div class="card rounded">
+        <div class="card-body">
+          <h3 class="card-title">Lote: <%= link_to(auction.code, auction_lot_path(auction.id)) %></h3>
+          <dl>
+            <dt><%= AuctionLot.human_attribute_name(:status) %></dt>
+            <dd><%= I18n.translate(auction.status) %></dd>
+          </dl>
+        </div>
+      </div>
     </div>
   <% end %>
+</div>
 
-  <% if @ongoing_auction_lots.empty? %>
-    <p>Não existem lotes em andamento</p>
-  <% end %>
+<% if @ongoing_auction_lots.empty? %>
+  <p>Não existem lotes em andamento</p>
+<% end %>
 
-  <h2> Lotes futuros: </h2>
+<h2 class="mb-3"> Lotes futuros: </h2>
+<div class="row">
   <% @future_auction_lots.each do |auction| %>
-    <div>
-      <h3>Lote: <%= link_to(auction.code, auction_lot_path(auction.id)) %></h3>
-      <dl>
-        <dt><%= AuctionLot.human_attribute_name(:status) %></dt>
-        <dd><%= I18n.translate(auction.status) %></dd>
-        <dt>Data de Início:</dt>
-        <dd>Começa em <%= distance_of_time_in_words(Date.today, auction.start_date) %></dd>
-      </dl>
+    <div class="col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Lote: <%= link_to(auction.code, auction_lot_path(auction.id)) %></h3>
+          <dl>
+            <dt><%= AuctionLot.human_attribute_name(:status) %></dt>
+            <dd><%= I18n.translate(auction.status) %></dd>
+            <dt>Data de Início:</dt>
+            <dd>Começa em <%= distance_of_time_in_words(Date.today, auction.start_date) %></dd>
+          </dl>
+        </div>
+      </div>
     </div>
   <% end %>
+</div>
 
-  <% if @future_auction_lots.empty? %>
-    <p>Não existem lotes futuros</p>
-  <% end %>
+<% if @future_auction_lots.empty? %>
+  <p>Não existem lotes futuros</p>
+<% end %>

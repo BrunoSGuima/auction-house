@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :product_models, only: [:index, :new, :create, :show, :update, :edit]
-  resources :categories, only: [:create, :new]
+  resources :categories, only: [:create, :new, :edit, :update, :index]
   resources :products, only: [:create, :new]
 
 end

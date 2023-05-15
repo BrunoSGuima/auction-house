@@ -2,13 +2,14 @@ class AuctionLotsController < ApplicationController
   before_action :check_status, only: [:remove_product, :add_product]
   before_action :set_auction, only: [:edit, :update, :show, :destroy, :approve, :remove_product, :add_product]
   before_action :expire_lots, only: [:show, :edit, :update]
+  before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
  
   def new
     @auction_lot = AuctionLot.new
   end
 
   def approve
-    if current_user.admin? && current_user != @auction_lot.user
+    if current_user && current_user.admin? && current_user != @auction_lot.user
       if @auction_lot.approve_by(current_user)
         redirect_to @auction_lot, notice: 'Lote aprovado com sucesso!'
       else
@@ -32,14 +33,19 @@ class AuctionLotsController < ApplicationController
   def edit; end
 
   def update
-    auction_param
+    if @auction_lot.status == "pending"
       if @auction_lot.update(auction_param)
         redirect_to @auction_lot, notice: "Lote atualizado com sucesso!"
       else
         flash[:alert] = "Não foi possível atualizar o lote."
         render 'edit'
       end
+    else
+      flash[:alert] = 'Só é permitido atualizar lotes com status: "Aguardando aprovação".'
+      redirect_to @auction_lot
+    end
   end
+  
 
   def create
     @auction_lot = AuctionLot.new(auction_param)
@@ -53,14 +59,22 @@ class AuctionLotsController < ApplicationController
   end
 
   def destroy
-    @auction_lot.destroy
-    if @auction_lot.destroy
-      redirect_to root_path, notice: "Lote removido com sucesso!"
+    if @auction_lot.status == "pending"
+      if @auction_lot.destroy
+        redirect_to root_path, notice: "Lote removido com sucesso!"
+      else
+        flash[:alert] = 'Não foi possível remover o lote'
+        @items = @auction_lot.products.group(:product_model).count
+        render 'show'
+      end
     else
-      flash[:alert] = 'Não foi possível remover o Lote'
+      flash[:alert] = 'Não é possível remover lotes aprovados'
+      @items = @auction_lot.products.group(:product_model).count
       render 'show'
     end
   end
+  
+  
 
 
   def add_product
@@ -93,6 +107,9 @@ class AuctionLotsController < ApplicationController
     if @auction_lot.bids.count > 0
         @auction_lot.update!(status: :closed)
     else
+      if @auction_lot.products.any?
+        @auction_lot.products.update_all(auction_lot_id: nil)
+      end
         @auction_lot.update!(status: :canceled)
     end
     redirect_to expired_auction_lots_path
@@ -111,8 +128,8 @@ class AuctionLotsController < ApplicationController
 
   def check_status
     @auction_lot = AuctionLot.find(params[:id])
-    unless @auction_lot.status == 'pending'
-      redirect_to @auction_lot, notice: 'Os itens só podem ser alterados enquanto seu status é "aguardando aprovação".'
+    unless @auction_lot.status == 'pending' || @auction_lot.status ==  'expired'
+      redirect_to @auction_lot, notice: 'Os itens só podem ser alterados enquanto seu status é "aguardando aprovação" ou "expirado".'
     end
   end
 

@@ -1,5 +1,5 @@
 <h2><%= AuctionLot.model_name.human %> <%= @auction_lot.code %> - <% if admin_signed_in? && current_user != @auction_lot.user && @auction_lot.status != 'approved' %>
-  <%= button_to 'Aprovar Lote', approve_auction_lot_path(@auction_lot), method: :patch %> 
+  <%= button_to 'Aprovar Lote', approve_auction_lot_path(@auction_lot), method: :patch, class: 'btn btn-success' %> 
 <% end %></h2>
 
 		<%= link_to 'Ver Lances', auction_lot_bids_path(@auction_lot) %> - <strong> O maior lance atual: <%= @highest_bid %></strong>

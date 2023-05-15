@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 second_user = User.create!(name:'Bruno', email: 'bruno@email.com', password: '123456', cpf: '47390195665')
 user = User.create!(name:'Cus', email: 'cus@leilaodogalpao.com.br', password: '123456', cpf: '52643812328')
+third_user = User.create!(name:'Jessica', email: 'jessica@leilaodogalpao.com.br', password: '123456', cpf: '52643812328')
 first_category = Category.create!(name:"Eletrônicos")
 second_category= Category.create!(name:"Ferramentas")
 pm = ProductModel.create!(name: 'Tv 32 polegadas', 

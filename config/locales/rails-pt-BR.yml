@@ -220,5 +220,5 @@ pt-BR:
       default: "%d/%m/%Y"
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
-      #default: "%a, %d de %B de %Y, %H:%M:%S %z"
+      time_bid: "%d/%m/%Y às %H:%M:%S"
     pm: ''

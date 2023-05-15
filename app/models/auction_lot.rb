@@ -2,10 +2,10 @@ class AuctionLot < ApplicationRecord
   validates :code, :start_date, :limit_date, :value_min, :diff_min, presence: true
   validates :code, uniqueness: true
   belongs_to :user
-  has_many :product_models, through: :products
-  has_many :products
+  has_many :products, dependent: :nullify
+  has_many :product_models, through: :products, dependent: :nullify
   has_many :bids
-  has_one :auction_approval, dependent: :destroy
+  has_one :auction_approval
   enum status: {pending: 0, approved: 5, expired: 9, closed: 10, canceled: 15}
   
   validate :start_date_is_future, on: :create

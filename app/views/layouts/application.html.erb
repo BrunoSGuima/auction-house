@@ -2,38 +2,45 @@
 <html>
   <head>
     <title>AuctionHouse</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application" %>
+    <%= javascript_importmap_tags %>
   </head>
   <body>
-    <header>
-      <%= link_to root_path do %>
-        <h1> Leilão de Estoque </h1>
-      <% end %>
-    <nav>
-      <% if admin_signed_in? %>
-        <%= link_to 'Nova Categoria', new_category_path %> |
-        <%= link_to 'Lotes Expirados', expired_auction_lots_path %> |
-      <% end %>
-      
-        <%= link_to 'Produtos', product_models_path %> |
-        <% if user_signed_in? %>
-          <% if current_user.admin? %>
-            <%= current_user.admin_desc %>
+    <header class="header-container">
+        <h1 class="centered-text">Leilão de Estoque</h1>
+        <%= link_to root_path do %>
+          <div id="myImage"></div>
+        <% end %>
+      <%= render 'shared/nav' %>
+      <%
+=begin%>
+ <nav>
+      <div class="ml-2">
+        <% if admin_signed_in? %>
+            <%= link_to 'Nova Categoria', new_category_path  %> |
+            <%= link_to 'Lotes Expirados', expired_auction_lots_path  %> |
+        <% end %>
+          <%= link_to 'Produtos', product_models_path  %> |
+          <% if user_signed_in? %>
+            <% if current_user.admin? %>
+              <%= current_user.admin_desc %>
+            <% else %>
+              <%= link_to 'Lotes Vencedores', winner_auction_lots_path  %> |
+              <%= current_user.description %>
+            <% end %>
+            <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
           <% else %>
-          <%= link_to 'Lotes Vencedores', winner_auction_lots_path %>
-            <%= current_user.description %>
+            <%= link_to 'Entrar', new_user_session_path %>
           <% end %>
-        <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'Entrar', new_user_session_path %>
-      <% end %>
-    </nav>
+        </div>
+      </nav> 
+<%
+=end%>
     </header>
-    <main>
+    <main class="container custom-container">
       <div>
         <%= notice %>
         <%= alert %>
@@ -42,3 +49,4 @@
     </main>
   </body>
 </html>
+

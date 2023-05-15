@@ -12,7 +12,7 @@ describe "Admin adiciona novos itens disponiveis" do
     auction = AuctionLot.create!(code: 'A1CB34', start_date: 1.week.from_now, limit_date: 2.weeks.from_now, 
                           value_min: 100, diff_min: 50, status: 'pending', user: user)
 
-    login_as(user)
+    login_as user
     visit root_path
     within('nav') do
       click_on 'Produtos'

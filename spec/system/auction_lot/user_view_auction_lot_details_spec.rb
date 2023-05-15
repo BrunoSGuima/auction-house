@@ -29,10 +29,11 @@ describe 'Usuário vê detalhes de um lote' do
     click_on 'Voltar'
 
     expect(current_path).to eq(root_path)
-
   end
+end
 
-  it 'como ADMIN' do
+describe 'Admin vê detalhes de um lote' do
+  it 'com sucesso' do
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
     AuctionLot.create!(code: 'A1CB34', start_date: '20/06/2044' , limit_date: '29/06/2044', 
       value_min: 100, diff_min: 50, status: 'pending', user: user)
