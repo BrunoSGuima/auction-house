@@ -5,9 +5,10 @@ class ProductModel < ApplicationRecord
   validates :code, :name, :description, :weight, :width, :height, :depth, presence: true
   validates :code, uniqueness: true
   before_validation :generate_code, on: :create
+  has_one_attached :image
 
 
-  def products_count_in_lots
+  def products_available_count
     products.where(auction_lot_id: nil).count
   end
 

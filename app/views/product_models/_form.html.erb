@@ -28,17 +28,21 @@
 			<%= f.label :depth %>
       <%= f.number_field :depth %>
 		</div>	<br>
-		<div>
 
 		<div>
 		<%= f.label :category %>
     <%= f.collection_select :category_id, @categories, :id, :name %>
   	</div><br>
-		
 
+		<div>
+			<%= f.label :image, 'Imagem' %>
+			<%= f.file_field :image %>
+		</div>
+		
 		<div>
 			<%= f.submit 'Enviar' %>
 		</div>
+		<br>
 
  <% end %>
 

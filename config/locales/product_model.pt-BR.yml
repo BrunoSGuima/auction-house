@@ -1,7 +1,7 @@
 pt-BR:
   activerecord:
     models:
-      product_model: 'Modelo de Produto'
+      product_model: 'Modelos de Produtos:'
     attributes:
       product_model:
         name: "Nome:"
@@ -13,3 +13,6 @@ pt-BR:
         description: "Descrição:"
         category: "Categoria:"
         product_model_category_id: "Categoria:"
+        code: "Código:"
+        products_available_count: "Quantidade de produtos disponíveis:"
+        dimension: "Dimensão:"

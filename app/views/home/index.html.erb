@@ -35,8 +35,8 @@
           <dl>
             <dt><%= AuctionLot.human_attribute_name(:status) %></dt>
             <dd><%= I18n.translate(auction.status) %></dd>
-            <dt>Data de Início:</dt>
-            <dd>Começa em <%= distance_of_time_in_words(Date.today, auction.start_date) %></dd>
+            <dt>Inicia em:</dt>
+            <dd><%= distance_of_time_in_words(Date.today, auction.start_date) %></dd>
           </dl>
         </div>
       </div>

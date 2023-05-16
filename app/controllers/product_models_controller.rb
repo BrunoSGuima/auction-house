@@ -50,6 +50,6 @@ class ProductModelsController < ApplicationController
 
   def product_model_params
     params.require(:product_model).permit(:name, :description, :weight, :width, 
-                                             :height, :depth, :category_id, :image_url)
+                                             :height, :depth, :category_id, :image)
   end
 end

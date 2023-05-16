@@ -22,7 +22,7 @@ class Bid < ApplicationRecord
   end
 
   def before_auction_end
-    if Time.current > auction_lot.limit_date
+    if Time.current > auction_lot.limit_date.end_of_day
       errors.add(:base, "O lance não pode ser feito após o encerramento do leilão.")
     end
   end

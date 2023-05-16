@@ -19,6 +19,7 @@ describe "Admin registra um modelo de produto" do
     fill_in 'Altura', with: 45
     fill_in 'Profundidade', with: 10
     select 'Esportes', from: 'product_model_category_id'
+    attach_file 'Imagem', Rails.root.join("spec/support/imgs/TVSamsung32.jpg")
     click_on 'Enviar'
     
     
@@ -29,6 +30,7 @@ describe "Admin registra um modelo de produto" do
     expect(page).to have_content 'Dimensão: 70cm x 45cm x 10cm'
     expect(page).to have_content 'Peso: 8000g'
     expect(page).to have_content 'Esportes'
+    expect(page).to have_css ("img[src*='TVSamsung32']")
   end
 
   it "deve preencher todos os campos" do

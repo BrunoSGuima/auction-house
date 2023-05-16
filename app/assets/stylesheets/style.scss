@@ -13,10 +13,13 @@ body {
   color: #fff;
 }
 
+.my-table th, .my-table td {
+  padding-right: 25px;
+}
 
 
 #myImage {
-  position: fixed;
+  position: absolute;
   top: 10px;
   left: 10px;
   height: 100px;

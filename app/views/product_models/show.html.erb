@@ -1,23 +1,21 @@
 <h3><%= @product_model.name %>  <% if admin_signed_in? %> <%= link_to('Editar', edit_product_model_path)%><% end %></h3>
 	
   <dl>
-    	<% if @product_model.image_url.present? %>
-  			<%= image_tag @product_model.image_url %>
-			<% else %>
-  			<p>Imagem não disponível</p>
-			<% end %>
-			
-			<dt> Nome: </dt>
+
+		<% if @product_model.image.attached? %>
+  		<%= image_tag url_for(@product_model.image) %>
+		<% end %>
+			<dt><%= ProductModel.human_attribute_name(:name)%></dt>
     	<dd><%= @product_model.name %> </dd>
-      <dt> Descrição: </dt>
+      <dt><%= ProductModel.human_attribute_name(:description)%></dt>
     	<dd><%= @product_model.description %> </dd>
-      <dt> Código: </dt>
+      <dt><%= ProductModel.human_attribute_name(:code)%></dt>
     	<dd><%= @product_model.code %> </dd>
-      <dt> Peso: </dt>
+      <dt><%= ProductModel.human_attribute_name(:weight)%></dt>
     	<dd><%= @product_model.weight %>g </dd>
-    	<dt> Dimensão: </dt>
+    	<dt><%= ProductModel.human_attribute_name(:dimension)%></dt>
     	<dd> <%= @product_model.width %>cm x <%= @product_model.height%>cm x <%= @product_model.depth %>cm </dd>
-			<dt> Categoria: </dt>
+			<dt><%= ProductModel.human_attribute_name(:category)%></dt>
     	<dd><%= @product_model.category.name %> </dd>
 	</dl>
 
