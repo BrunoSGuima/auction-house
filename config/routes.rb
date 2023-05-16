@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+
   root to: 'home#index'
 
   resources :auction_lots, only: [:show, :new, :create, :update, :edit, :destroy] do
@@ -10,6 +11,9 @@ Rails.application.routes.draw do
     delete :remove_product, on: :member
     get :expired, on: :collection
     get :winner, on: :collection
+    post :favorite, on: :member
+    delete :unfavorite, on: :member
+    get :favorites, on: :collection
   end
 
   resources :product_models, only: [:index, :new, :create, :show, :update, :edit]

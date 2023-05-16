@@ -1,9 +1,9 @@
 <h1><%= ProductModel.model_name.human %></h1>
 
 <% if admin_signed_in? %>
-  <%= link_to 'Cadastrar Novo', new_product_model_path %> 
+  <%= link_to 'Cadastrar Novo', new_product_model_path, class: "btn btn-light" %> 
   <% if ProductModel.exists? %>
-    | <%= link_to 'Adicionar Item', new_product_path %>
+    | <%= link_to 'Adicionar Item', new_product_path, class: "btn btn-light" %>
   <% end %>
 <% end %>
 
@@ -12,7 +12,7 @@
     <% @product_models.each do |pm| %>
       <div class="col-lg-3 mb-4">
         <div>
-          <h2><%= link_to pm.name, product_model_path(pm) %></h2>
+          <h2><%= link_to pm.name, product_model_path(pm), class: "btn btn-primary" %></h2>
           <dl>
             <dt><%= ProductModel.human_attribute_name(:code)%></dt>
             <dd><%= pm.code %></dd>
@@ -33,5 +33,5 @@
   <p>Nenhum produto cadastrado.</p>
 <% end %>
 
-<%= link_to('Voltar', root_path) %>
+<div><%= link_to 'Voltar', root_path, class: "btn btn-warning" %></div>
 

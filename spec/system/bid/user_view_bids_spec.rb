@@ -30,10 +30,10 @@ describe "Usuário visita tela de bids" do
     login_as user
     visit root_path
     click_on auction.code
-    fill_in 'Valor total', with: 90
-    click_on 'Criar Lance'
+    fill_in 'Valor do lance', with: 90
+    click_on 'Enviar'
 
-    expect(page).to have_content 'Não foi possível fazer o seu lance! Valor total deve ser maior que o lance mínimo.'
+    expect(page).to have_content 'Não foi possível fazer o seu lance! Valor do lance deve ser maior que o lance mínimo.'
     expect(page).not_to have_content 'Seu lance foi feito com sucesso.'
   end
 
@@ -47,10 +47,10 @@ describe "Usuário visita tela de bids" do
     login_as user
     visit root_path
     click_on auction.code
-    fill_in 'Valor total', with: 140
-    click_on 'Criar Lance'
+    fill_in 'Valor do lance', with: 140
+    click_on 'Enviar'
 
-    expect(page).to have_content 'Não foi possível fazer o seu lance! Valor total deve ser maior que o lance atual somado com a diferença mínima.'
+    expect(page).to have_content 'Não foi possível fazer o seu lance! Valor do lance deve ser maior que o lance atual somado com a diferença mínima.'
     expect(page).not_to have_content 'Seu lance foi feito com sucesso.'
   end
 
@@ -64,8 +64,8 @@ describe "Usuário visita tela de bids" do
     login_as user
     visit root_path
     click_on auction.code
-    fill_in 'Valor total', with: 200
-    click_on 'Criar Lance'
+    fill_in 'Valor do lance', with: 200
+    click_on 'Enviar'
     
 
     expect(page).not_to have_content 'Não foi possível fazer o seu lance.'
@@ -94,8 +94,8 @@ describe "Usuário visita tela de bids" do
     login_as user
     visit root_path
     click_on auction.code
-    fill_in 'Valor total', with: 200
-    click_on 'Criar Lance'
+    fill_in 'Valor do lance', with: 200
+    click_on 'Enviar'
     
 
     expect(page).not_to have_content 'Não foi possível fazer o seu lance.'
@@ -111,8 +111,8 @@ describe "Usuário visita tela de bids" do
 
     visit root_path
     click_on auction.code
-    fill_in 'Valor total', with: 200
-    click_on 'Criar Lance'
+    fill_in 'Valor do lance', with: 200
+    click_on 'Enviar'
     
 
     expect(page).not_to have_content 'Não foi possível fazer o seu lance.'

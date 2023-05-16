@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_many :auction_lots
   has_many :auction_approvals, foreign_key: 'approved_by_id', dependent: :nullify
 
+  has_many :favorite_auction_lots, dependent: :destroy
+  has_many :favorites, through: :favorite_auction_lots, source: :auction_lot
+
+
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
   before_save :set_admin_role

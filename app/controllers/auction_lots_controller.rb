@@ -1,6 +1,6 @@
 class AuctionLotsController < ApplicationController
   before_action :check_status, only: [:remove_product, :add_product]
-  before_action :set_auction, only: [:edit, :update, :show, :destroy, :approve, :remove_product, :add_product]
+  before_action :set_auction, only: [:edit, :update, :show, :destroy, :approve, :remove_product, :add_product, :favorite, :unfavorite]
   before_action :expire_lots, only: [:show, :edit, :update]
   before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
  
@@ -118,6 +118,20 @@ class AuctionLotsController < ApplicationController
   def expired
     @expired_auction_lots = AuctionLot.where(status: AuctionLot.statuses[:expired])
     @canceled_closed_auction_lots = AuctionLot.where(status: [AuctionLot.statuses[:canceled], AuctionLot.statuses[:closed]])
+  end
+
+  def favorite
+    current_user.favorites << @auction_lot
+    redirect_to @auction_lot
+  end
+
+  def unfavorite
+    current_user.favorites.delete(@auction_lot)
+    redirect_to @auction_lot
+  end
+
+  def favorites
+    @favorites = current_user.favorites
   end
 
  

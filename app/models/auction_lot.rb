@@ -6,6 +6,9 @@ class AuctionLot < ApplicationRecord
   has_many :product_models, through: :products, dependent: :nullify
   has_many :bids
   has_one :auction_approval
+  has_many :favorite_auction_lots, dependent: :destroy
+  has_many :favorited_by, through: :favorite_auction_lots, source: :user
+
   enum status: {pending: 0, approved: 5, expired: 9, closed: 10, canceled: 15}
   
   validate :start_date_is_future, on: :create

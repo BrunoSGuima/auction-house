@@ -1,16 +1,16 @@
+/* Body */
 .card-body {
   border-radius: 5px;
-  background-color: lightgray;
+  background-color: #aca3a7;
   color: black
 }
-
 
 .custom-container {
   max-width: 95%;
 }
 body {
-  background-color: #484848;
-  color: #fff;
+  background-color:#7a7173;;
+  color: #ffffff;
 }
 
 .my-table th, .my-table td {
@@ -18,49 +18,46 @@ body {
 }
 
 
-#myImage {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  background-image: url(asset-path('icone.jpg'));
-  background-size: cover;
-  z-index: 10;
+.margin-right { 
+  margin-right:60px; 
 }
 
-
 .centered-text {
-  text-align: center;
+text-align: center;
 }
 
 .ml-2 {
-  margin-left: 8rem;
-  color: red;
+margin-left: 8rem;
+color: red;
 }
 
-.navbar .navbar-nav .nav-link { color: #fff; }
-.navbar .navbar-nav .nav-link:hover { color: #fbc531; }
-
-
-
-.header-container {
-  color: rgb(188, 187, 187)
+.custom-link {
+  color: #2e2c2a
 }
 
-.nav-item {
-  display: flex;
-  align-items: center;
+.custom-link:hover {
+  color: #fbc531
 }
 
-.nav-description {
-  margin-left: 10px;
-  padding:4px;
+.btn-add {
+  margin-top: 22px;
 }
 
-.btn-custom {
-  padding-top: 3px; 
-  padding-bottom: 3px; 
+.btn-see {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.btn-fav{
+  margin-left: 20px;
+}
+
+.btn-itm{
+  margin-bottom: 5px;
+  margin-top: 2px;
+}
+
+.btn-bid{
+  margin-top: 5px;
 }
 

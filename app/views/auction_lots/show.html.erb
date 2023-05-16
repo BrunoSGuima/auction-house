@@ -1,15 +1,34 @@
-<h2><%= AuctionLot.model_name.human %> <%= @auction_lot.code %> - <% if admin_signed_in? && current_user != @auction_lot.user && @auction_lot.status != 'approved' %>
-  <%= button_to 'Aprovar Lote', approve_auction_lot_path(@auction_lot), method: :patch, class: 'btn btn-success' %> 
-<% end %></h2>
+<h2 class="d-flex align-items-center">
+	<%= AuctionLot.model_name.human %> <%= @auction_lot.code %>  
+	<% if current_user && !current_user.admin? && current_user.favorites.include?(@auction_lot) %>
+ 			<%= button_to 'Remover dos Favoritos', unfavorite_auction_lot_path(@auction_lot), method: :delete, class: "btn btn-danger btn-fav"  %>
+		<% elsif current_user && !current_user.admin? %>
+  		<%= button_to 'Adicionar aos Favoritos', favorite_auction_lot_path(@auction_lot), class: "btn btn-success btn-fav"  %>
+		<% end %>
 
-		<%= link_to 'Ver Lances', auction_lot_bids_path(@auction_lot) %> - <strong> O maior lance atual: <%= @highest_bid %></strong>
+	<% if admin_signed_in? && current_user != @auction_lot.user && @auction_lot.status != 'approved' %>
+  	<%= button_to 'Aprovar Lote', approve_auction_lot_path(@auction_lot), method: :patch, class: 'btn btn-success btn-fav' %> 
+	<% end %>
+</h2>
+
+				
+		<% if @auction_lot.expired? %>
+  		<p>Este lote perdeu a validade.</p>
+		<% end %>
+
+		<%= link_to 'Ver Lances', auction_lot_bids_path(@auction_lot), class: "btn btn-primary btn-see" %> - <strong> O maior lance atual: <%= @highest_bid %></strong>
 		<br>
 		<br>
 		<%= form_for [@auction_lot, Bid.new] do |f| %>
-			<%= f.label :amount %>
-			<%= f.number_field :amount, step: 1 %>
-			<%= f.submit %>
-		<% end %>
+		<strong><%= f.label :amount %>:</strong>
+    <div class="col-sm-2">
+      <%= f.number_field :amount, step: 1, class: 'form-control' %>
+    </div>
+    <div class="col-sm-1">
+      <%= f.submit 'Enviar', class: 'btn btn-success btn-bid' %>
+    </div>
+  </div>
+<% end %>
 
 	<dl>
 			<% if @auction_lot.auction_approval.present? %>
@@ -30,7 +49,7 @@
     	<dd><%= I18n.translate(@auction_lot.status) %></dd>
 			<dt> Itens no lote:</dt>
     	<dd><% @items.each_pair do |pm, count| %>
-      <%= link_to pm.name, product_model_path(pm) %> - Quantidade: <%= count %><br>
+      <%= link_to pm.name, product_model_path(pm), class: "btn btn-light btn-itm" %> - Quantidade: <%= count %><br>
   		<% end %></dd>
 		</dl>
 	<% if admin_signed_in? %>
@@ -39,12 +58,12 @@
 				<%= f.label :product_id, 'Produto' %>
 				<%= f.collection_select :product_id, Product.where(auction_lot_id: nil), :id, proc { |product| "#{product.product_model.name} - ID: #{product.id}" }, include_blank: true %>
 			</div>
-			<%= f.submit 'Adicionar Produto' %>
+			<%= f.submit 'Adicionar Produto', class: 'btn btn-success btn-bid' %>
 		<% end %>
 		<% @auction_lot.products.each do |product| %>
 			<div class="product">
 				<%= "#{product.product_model.name} - ID: #{product.id}" %>
-				<%= button_to 'Remover Produto', remove_product_auction_lot_path(@auction_lot, product_id: product.id), method: :delete %> 
+				<%= button_to 'Remover Produto', remove_product_auction_lot_path(@auction_lot, product_id: product.id), method: :delete, class: 'btn btn-danger btn-bid' %> 
 			</div>
 		<% end %>
 				
@@ -55,9 +74,9 @@
 <br>
 
 <% if admin_signed_in? %>
-<%= link_to('Editar', edit_auction_lot_path)%>
-<%= button_to 'Remover', auction_lot_path, method: :delete %>
+<%= link_to 'Editar', edit_auction_lot_path, class: 'btn btn-primary btn-bid' %>
+<%= button_to 'Remover', auction_lot_path, method: :delete, class: 'btn btn-danger btn-bid' %>
 <% end %>
 
 
-<%= link_to('Voltar', root_path)%>
+<%= link_to 'Voltar', root_path, class: 'btn btn-warning btn-bid' %>

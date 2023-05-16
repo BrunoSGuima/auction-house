@@ -1,0 +1,87 @@
+.footer {
+  position: relative;
+  padding-top: 20px;
+  background: #534b45;
+  margin-top: 20px;
+}
+
+
+.footer .footer-contact {
+  position: relative;
+  padding: 10px 0;
+  text-align: center;
+  border-top: 1px solid rgba(256, 256, 256, .1);
+}
+
+.footer .footer-contact h4 {
+  position: relative;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+.footer .footer-contact p {
+  margin: 0;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+
+.footer .copyright {
+  position: relative;
+  padding: 10px 0;
+  background: #2e2c2a;
+}
+
+.footer .copyright .copy-text p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.footer .copyright .copy-text p a {
+  color: #dddddd;
+}
+
+.footer .copyright .copy-text p a:hover {
+  color: #fbc531;
+}
+
+.footer .copyright .copy-menu {
+  position: relative;
+  font-size: 0;
+  text-align: right;
+}
+
+.footer .copyright .copy-menu a {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+  margin-right: 15px;
+  padding-right: 15px;
+  border-right: 1px solid rgba(255, 255, 255, .3);
+}
+
+.footer .copyright .copy-menu a:hover {
+  color: #fbc531;
+}
+
+.footer .copyright .copy-menu a:last-child {
+  margin-right: 0;
+  padding-right: 0;
+  border-right: none;
+}
+
+@media (max-width: 767.98px) {
+  .footer .copyright .copy-text,
+  .footer .copyright .copy-menu {
+    text-align: center;
+  }
+
+  .footer .copyright .copy-text p {
+    margin-bottom: 5px;
+  }
+}

@@ -4,9 +4,10 @@ pt-BR:
       bid: 'Lance'
     attributes:
       bid:
-        amount: 'Valor total'
+        amount: 'Valor do lance'
         start_date: 'Data de início:'
         limit_date: 'Data limite:'
         value_min: 'Valor mínimo do lance:'
         diff_min: 'Diferença mínima do lance:'
+        submit: "Fazer lance"
         
