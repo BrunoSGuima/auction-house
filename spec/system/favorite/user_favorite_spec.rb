@@ -77,12 +77,8 @@ describe "Usuário clica em Favoritos" do
     travel_to 1.week.ago do
       user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
       auction = AuctionLot.create!(code: 'A1CB34', start_date: 1.day.from_now, limit_date: 3.days.from_now, 
-                              value_min: 100, diff_min: 100, status: 'approved', user: user )
-      login_as second_user
-      visit root_path
-      click_on "A1CB34"
-      click_on "Adicionar aos Favoritos"
-      click_on "Sair"
+                            value_min: 100, diff_min: 100, status: 'approved', user: user )
+      FavoriteAuctionLot.create!(auction_lot: auction, user: second_user)
     end
 
     login_as second_user

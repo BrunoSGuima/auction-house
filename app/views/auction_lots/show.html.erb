@@ -1,17 +1,19 @@
 <h2 class="d-flex align-items-center">
 	<%= AuctionLot.model_name.human %> <%= @auction_lot.code %>  
-	<% if current_user && !current_user.admin? && current_user.favorites.include?(@auction_lot) %>
+		<% if current_user && !current_user.admin? && current_user.favorites.include?(@auction_lot) %>
  			<%= button_to 'Remover dos Favoritos', unfavorite_auction_lot_path(@auction_lot), method: :delete, class: "btn btn-danger btn-fav"  %>
 		<% elsif current_user && !current_user.admin? %>
   		<%= button_to 'Adicionar aos Favoritos', favorite_auction_lot_path(@auction_lot), class: "btn btn-success btn-fav"  %>
 		<% end %>
-
+		<% if current_user && !current_user.admin? %>
+			<div><%= link_to 'Dúvidas?', new_auction_lot_question_path(@auction_lot), class: "btn btn-warning btn-qst" %></div>
+		<% end %>
+	
+	<div><%= link_to 'Perguntas Frequentes', question_lot_auction_lot_path(@auction_lot), class: "btn btn-info btn-qst" %>
 	<% if admin_signed_in? && current_user != @auction_lot.user && @auction_lot.status != 'approved' %>
   	<%= button_to 'Aprovar Lote', approve_auction_lot_path(@auction_lot), method: :patch, class: 'btn btn-success btn-fav' %> 
 	<% end %>
-</h2>
-
-
+	</h2>
 
 		<%= link_to 'Ver Lances', auction_lot_bids_path(@auction_lot), class: "btn btn-primary btn-see" %> - <strong> O maior lance atual: <%= @highest_bid %></strong>
 		<br>

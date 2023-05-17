@@ -1,0 +1,18 @@
+<h2>Histórico de perguntas neste lote:</h2>
+
+<% if @questions.empty? %>
+  <p> Não há perguntas neste lote. </p>
+<% else %>
+  <% @questions.each do |question| %>
+    <div>
+      <strong>Pergunta: <%= question.question_text %></strong>
+      <% if question.admin.present? %>
+        <dd>Resposta:</dd> <dl class="qst-adm"><%= question.response_text || 'Ainda não respondida' %></dl>
+        <dd>Respondida por:</dl><p class="qst-blk"> <%= question.admin.name %></p>
+      <% else %>
+        <p class="qst-adm"><%= question.response_text || 'Ainda não respondida' %></p>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+

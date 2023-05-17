@@ -1,0 +1,10 @@
+<h1>Faça uma nova pergunta</h1>
+<%= form_with(model: [@auction_lot, @question]) do |form| %>
+  <div>
+    <%= form.label :question_text %>
+    <%= form.text_area :question_text %>
+  </div>
+  <div>
+    <%= form.submit "Enviar" %>
+  </div>
+<% end %>

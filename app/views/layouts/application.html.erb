@@ -42,11 +42,12 @@
     </header>
     <main class="container custom-container">
       <div>
-        <%= notice %>
-        <%= alert %>
+        <div class="notice"><%= notice %></div>
+        <div class="alert"><%= alert %></div>
       </div><br>
       <%= yield %>
     </main>
+
   </body>
   <%= render 'shared/footer' %>
 </html>

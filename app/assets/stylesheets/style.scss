@@ -44,8 +44,7 @@ color: red;
 }
 
 .btn-see {
-  margin-top: 5px;
-  margin-bottom: 0px;
+  margin-top: 10px;
 }
 
 .btn-fav{
@@ -61,7 +60,49 @@ color: red;
   margin-top: 5px;
 }
 
+.btn-qst{
+  margin-left: 20px;
+}
+
+.btn-resp{
+  margin-bottom: 10px;
+}
+
+.btn-edit{
+  margin-top: 10px;
+}
+
 .expired-message{
   color: red
+}
+
+.qst-usr{
+  color: yellow
+}
+
+.qst-adm{
+  color: orangered
+}
+
+.qst-blk{
+  color: black
+}
+
+.hide-ask{
+  color: rgb(106, 2, 2)
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: 5px;
+}
+
+.alert{
+  color: yellow
+}
+
+.notice{
+  color: orange
 }
 

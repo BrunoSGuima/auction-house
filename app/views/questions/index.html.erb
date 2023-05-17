@@ -1,0 +1,18 @@
+<h1>Perguntas:</h1>
+
+<% @questions.each do |question| %>
+  <% unless question.response_text.present? %>
+    <div>
+      <h3>
+        <%= link_to question.question_text.split[0..2].join(' ') + '...', question_path(question) %>
+        <span class="hide-ask"><%= "Pergunta Ocultada" unless question.visible %></span>
+        </h3>
+        <p>Feita por: <%= question.user.name %></p>
+        <p>Resposta: <%= question.response_text ? question.response_text : "Ainda não respondida" %></p>
+      </div>
+  <% end %>
+<% end %>
+
+
+
+

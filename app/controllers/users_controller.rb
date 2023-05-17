@@ -1,21 +1,25 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_user, only: [:block, :unblock]
-  before_action :authorize_admin, only: [:block, :unblock]
+  before_action :find_user, only: [:block, :unblock, :suspend]
+  before_action :authorize_admin, only: [:block, :unblock, :suspend]
 
   def index
     @users = User.where.not(role: :admin)
   end
   
+  def suspend
+    @user.suspend!
+    redirect_to users_path, alert: 'Usuário foi suspenso.'
+  end
 
   def block
     @user.block!
-    redirect_to users_path, notice: 'Usuário foi bloqueado.'
+    redirect_to users_path, alert: 'Usuário foi bloqueado.'
   end
 
   def unblock
     @user.unblock!
-    redirect_to users_path, notice: 'Usuário foi desbloqueado.'
+    redirect_to users_path, notice: 'As restrições de acesso foram removidas.'
   end
 
   private

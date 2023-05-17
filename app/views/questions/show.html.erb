@@ -1,0 +1,11 @@
+<h1><%= @question.question_text %></h1>
+<p class="qst-usr">Feita por: <%= @question.user.name %></p>
+<p>Resposta: <%= @question.response_text ? @question.response_text : "Ainda não respondida" %></p>
+<p class="qst-adm">Respondida por: <%= @question.admin ? @question.admin.name : "" %></p>
+
+
+<% if current_user.admin? %>
+  <%= link_to 'Responder', edit_question_path(@question), class: 'btn btn-success btn-resp' %>
+  <%= button_to 'Ocultar', hide_question_path(@question), method: :patch, class: 'btn btn-dark' %>
+<% end %>
+

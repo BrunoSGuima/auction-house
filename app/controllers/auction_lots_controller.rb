@@ -1,8 +1,10 @@
 class AuctionLotsController < ApplicationController
   before_action :check_status, only: [:remove_product, :add_product]
-  before_action :set_auction, only: [:edit, :update, :show, :destroy, :approve, :remove_product, :add_product, :favorite, :unfavorite]
+  before_action :set_auction, only: [:edit, :update, :show, :destroy, :approve, :remove_product, :add_product, 
+                                      :favorite, :unfavorite, :question_lot]
   before_action :expire_lots, only: [:show, :edit, :update]
   before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
+
  
   def new
     @auction_lot = AuctionLot.new
@@ -73,10 +75,12 @@ class AuctionLotsController < ApplicationController
       render 'show'
     end
   end
+
+  def question_lot
+    @questions = @auction_lot.questions.where(visible: true)
+  end
   
   
-
-
   def add_product
     @auction_lot = AuctionLot.find(params[:id])
     product_id = params[:product_id]

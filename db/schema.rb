@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_17_012901) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_17_231956) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -110,6 +110,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_012901) do
     t.index ["product_model_id"], name: "index_products_on_product_model_id"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "auction_lot_id", null: false
+    t.integer "admin_id"
+    t.text "question_text"
+    t.text "response_text"
+    t.boolean "visible", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_questions_on_admin_id"
+    t.index ["auction_lot_id"], name: "index_questions_on_auction_lot_id"
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -121,7 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_012901) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", default: 0
-    t.integer "status"
+    t.integer "status", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -138,4 +152,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_012901) do
   add_foreign_key "product_models", "categories"
   add_foreign_key "products", "auction_lots"
   add_foreign_key "products", "product_models"
+  add_foreign_key "questions", "auction_lots"
+  add_foreign_key "questions", "users"
+  add_foreign_key "questions", "users", column: "admin_id"
 end

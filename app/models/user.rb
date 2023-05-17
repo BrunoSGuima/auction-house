@@ -10,7 +10,10 @@ class User < ApplicationRecord
   has_many :favorite_auction_lots, dependent: :destroy
   has_many :favorites, through: :favorite_auction_lots, source: :auction_lot
 
-  enum status: { unblocked: 0, blocked: 5 }
+  has_many :questions
+  has_many :admin_questions, class_name: 'Question', foreign_key: 'admin_id'
+
+  enum status: { unblocked: 0, blocked: 5, suspended: 10 }
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
   before_save :set_admin_role
@@ -27,6 +30,17 @@ class User < ApplicationRecord
     "#{name} - #{email} - #{role.upcase}"
   end
 
+  def suspended?
+    self.status == 'suspended'
+  end
+
+  def suspend!
+    self.status = :suspended
+    unless save
+      errors.add(:base, "Não foi possível suspender o usuário")
+    end
+  end
+
   def blocked?
     self.status == 'blocked'
   end
@@ -34,7 +48,7 @@ class User < ApplicationRecord
   def unblock!
     self.status = :unblocked
     unless save
-      errors.add(:base, "Não foi possível desbloquear o usuário")
+      errors.add(:base, "Não foi possível liberar o usuário")
     end
   end
 

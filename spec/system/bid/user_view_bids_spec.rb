@@ -121,4 +121,21 @@ describe "Usuário visita tela de bids" do
     expect(current_path).to eq user_session_path 
   end
 
+  it "e tenta fazer um lance com a conta suspensa" do
+    user = User.create!(name: 'Bruno', email: 'bruno@email.com', password: 'password', cpf: '48625343171', status: "suspended")
+    admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '67428513847')
+    auction = AuctionLot.create!(code: 'A1CB34', start_date: Date.today , limit_date: 1.week.from_now, 
+                                value_min: 100, diff_min: 50, status: 'approved', user: admin)
+
+
+    login_as user
+    visit root_path
+    click_on auction.code
+    fill_in 'Valor do lance', with: 200
+    click_on 'Enviar'
+        
+    expect(page).to have_content "Sua conta está suspensa."
+    expect(current_path).to eq auction_lot_path(auction)
+  end
+
 end

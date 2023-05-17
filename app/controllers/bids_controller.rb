@@ -3,6 +3,7 @@ class BidsController < ApplicationController
   before_action :set_auction_lot, only: [:create]
   before_action :check_auction_lot_status, only: [:create]
   before_action :check_user_role, only: [:create]
+  before_action :check_user_status, only: [:create]
   
   def create
     @bid = Bid.new(bid_params)
@@ -35,6 +36,12 @@ class BidsController < ApplicationController
   def check_user_role
     if current_user.admin?
       redirect_to @auction_lot, alert: 'Os administradores não podem fazer lances.'
+    end
+  end
+
+  def check_user_status
+    if current_user.suspended?
+      redirect_to @auction_lot, alert: 'Sua conta está suspensa.'
     end
   end
 

@@ -1,0 +1,13 @@
+<%= form_with(model: @question, url: question_path(@question), method: :patch) do |form| %>
+  <div>
+    <%= form.label :question_text %>
+    <%= form.text_area :question_text, disabled: true %>
+  </div>
+  <div>
+    <%= form.label :response_text %>
+    <%= form.text_area :response_text %>
+  </div>
+  <div>
+    <%= form.submit "Salvar", class: 'btn btn-success btn-edit' %>
+  </div>
+<% end %>

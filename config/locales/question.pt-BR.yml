@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      question: "Pergunta"
+    attributes:
+      question:
+        question_text: "Pergunta:"
+        response_text: "Resposta:"
+        visible: "Visível"
+        hide: "Oculto"
+    submit: "Salvar"
