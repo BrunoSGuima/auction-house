@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  resources :users, only: [:index] do
+    patch 'block', on: :member
+    patch 'unblock', on: :member
+  end
+  
+
   root to: 'home#index'
 
   resources :auction_lots, only: [:show, :new, :create, :update, :edit, :destroy] do

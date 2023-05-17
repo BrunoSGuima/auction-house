@@ -121,10 +121,4 @@ describe "Usuário visita tela de bids" do
     expect(current_path).to eq user_session_path 
   end
 
-
-  
-  
-  
-  
-  
 end

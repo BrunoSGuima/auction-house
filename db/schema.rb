@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_16_131650) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_17_012901) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -96,7 +96,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_131650) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image_url"
     t.integer "category_id", null: false
     t.index ["category_id"], name: "index_product_models_on_category_id"
   end
@@ -122,6 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_131650) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", default: 0
+    t.integer "status"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

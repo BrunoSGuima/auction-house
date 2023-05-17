@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :favorite_auction_lots, dependent: :destroy
   has_many :favorites, through: :favorite_auction_lots, source: :auction_lot
 
-
+  enum status: { unblocked: 0, blocked: 5 }
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
   before_save :set_admin_role
@@ -27,6 +27,33 @@ class User < ApplicationRecord
     "#{name} - #{email} - #{role.upcase}"
   end
 
+  def blocked?
+    self.status == 'blocked'
+  end
+
+  def unblock!
+    self.status = :unblocked
+    unless save
+      errors.add(:base, "Não foi possível desbloquear o usuário")
+    end
+  end
+
+  def block!
+    self.status = :blocked
+    unless save
+      errors.add(:base, "Não foi possível bloquear o usuário")
+    end
+  end
+
+  def active_for_authentication?
+    super && !blocked?
+  end
+
+  def inactive_message
+    blocked? ? :blocked : super
+  end
+  
+
   private
   
   def set_admin_role
@@ -34,6 +61,7 @@ class User < ApplicationRecord
       self.role = :admin
     end
   end
+  
 
   def cpf_validation
     errors.add(:cpf, 'INVÁLIDO!') unless cpf_valido(cpf)

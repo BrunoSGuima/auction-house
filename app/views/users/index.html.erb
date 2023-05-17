@@ -1,0 +1,29 @@
+<h2> Usuários Cadastrados: </h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>CPF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.cpf %></td>
+        <td>
+          <% unless user.blocked? %>
+            <%= button_to 'Bloquear', block_user_path(user), method: :patch %>
+          <% else %>
+            <%= button_to 'Desbloquear', unblock_user_path(user), method: :patch %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
