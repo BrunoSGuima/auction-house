@@ -11,10 +11,7 @@
 	<% end %>
 </h2>
 
-				
-		<% if @auction_lot.expired? %>
-  		<p>Este lote perdeu a validade.</p>
-		<% end %>
+
 
 		<%= link_to 'Ver Lances', auction_lot_bids_path(@auction_lot), class: "btn btn-primary btn-see" %> - <strong> O maior lance atual: <%= @highest_bid %></strong>
 		<br>

@@ -46,12 +46,13 @@ margin-left: 10px;
 position: absolute;
 top: 1vh;
 left: 1vw;
-height: 8vw;
-width: 8vw;
+height: 7vw;
+width: 7vw;
 border-radius: 50%;
 background-image: url(asset-path('icone.jpg'));
 background-size: cover;
 z-index: 10;
+margin-top: 7px;
 }
 @media (max-width: 768px) {
   #myImage {

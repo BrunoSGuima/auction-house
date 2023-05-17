@@ -8,11 +8,16 @@
       <div class="col-lg-4 mb-4">
         <div class="card">
           <div class="card-body">
-            <h3 class="card-title">Lote: <%= link_to(lot.code, auction_lot_path(lot.id)) %></h3>
-            <dl>
-              <dt><%= AuctionLot.human_attribute_name(:status) %></dt>
-              <dd><%= I18n.translate(lot.status) %></dd>
-              <dt>Inicia em:</dt>
+            <h3 class="card-title">Lote: <%= link_to(lot.code, auction_lot_path(lot.id)) %> </h3>
+             <dl>
+               <div> 
+                <% if lot.expired? %>
+  			          <p class="expired-message">Este lote perdeu a validade.</p>
+			          <% end %> 
+                </div>
+                <dt><%= AuctionLot.human_attribute_name(:status) %></dt>
+                <dd><%= I18n.translate(lot.status) %></dd>
+                <dt>Inicia em:</dt>
               <dd><%= distance_of_time_in_words(Date.today, lot.start_date) %></dd>
             </dl>
           </div>
