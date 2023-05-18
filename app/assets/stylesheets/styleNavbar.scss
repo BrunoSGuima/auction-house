@@ -13,6 +13,11 @@
   padding-bottom: 15px;
 }
 
+.nav-link { 
+  z-index: 11; 
+  margin-left: 25px;
+}
+
 .navbar .navbar-nav .nav-link { 
   color: #fff; 
 }
@@ -51,14 +56,14 @@ width: 6vw;
 border-radius: 50%;
 background-image: url(asset-path('icone.jpg'));
 background-size: cover;
-z-index: 10;
-margin-top: 7px;
+z-index: 1;
+margin-top: 20px;
 }
 
 @media (max-width: 768px) {
   #myImage {
-    height: 13vw; 
-    width: 13vw; 
+    height: 14vw; 
+    width: 14vw; 
   }
 }
 
@@ -68,11 +73,3 @@ margin-top: 7px;
   }
 }
 
-
-
-
-.color1 {color: #1a0f10;}
-.color2 {color: #2e2c2a;}
-.color3 {color: #534b45;}
-.color4 {color: #7a7173;}
-.color5 {color: #aca3a7;}

@@ -4,8 +4,10 @@
     <%= f.label :name, 'Nome:' %>
     <%= f.text_field :name %>
   </div>
-  <%= f.submit 'Salvar' %>
+  <%= f.submit 'Salvar', class: 'btn btn-success btn-bid' %>
 <% end %>
+
+<%= link_to 'Voltar', root_path, class: 'btn btn-warning btn-bid' %>
 
 
 

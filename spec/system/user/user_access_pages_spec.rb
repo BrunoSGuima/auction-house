@@ -43,7 +43,7 @@ describe "Usuário" do
     admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '67428513847')
     lot = AuctionLot.create!(code: 'A1CB34', start_date: 1.day.from_now, limit_date: 3.days.from_now, 
       value_min: 100, diff_min: 100, status: 'approved', user: user )
-    question = Question.create!(user: user, auction_lot: lot)
+    question = Question.create!(user: user, auction_lot: lot, question_text: "teste?")
 
     login_as user
     visit root_path

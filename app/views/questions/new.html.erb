@@ -5,6 +5,8 @@
     <%= form.text_area :question_text %>
   </div>
   <div>
-    <%= form.submit "Enviar" %>
+    <%= form.submit "Enviar", class: 'btn btn-primary btn-bus' %>
   </div>
 <% end %>
+
+<%= link_to 'Voltar', root_path, class: 'btn btn-warning btn-bid' %>

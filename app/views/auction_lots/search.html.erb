@@ -1,0 +1,18 @@
+<% if @auction_lots.present? %>
+  <h2>Resultados da pesquisa:</h2>
+  <ul>
+    <% @auction_lots.each do |auction_lot| %>
+      <li>
+        <h3><%= link_to auction_lot.code, auction_lot_path(auction_lot) %></h3>
+        <p>Produtos:</p>
+        <ul>
+          <% auction_lot.products.each do |product| %>
+            <li><%= product.product_model.name %></li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Nenhum resultado encontrado para sua pesquisa.</p>
+<% end %>

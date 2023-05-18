@@ -1,95 +1,111 @@
-/* Body */
-.card-body {
-  border-radius: 5px;
-  background-color: #aca3a7;
-  color: black
-}
-
-.custom-container {
-  max-width: 95%;
-}
+/* General Body Styles */
 body {
-  background-color:#7a7173;;
+  background-color: #7a7173;
   color: #ffffff;
 }
 
+/* Container Styles */
+.custom-container {
+  max-width: 95%;
+}
+
+/* Table Styles */
 .my-table th, .my-table td {
   padding-right: 25px;
 }
 
-
-.margin-right { 
-  margin-right:60px; 
+/* Card Styles */
+.card-body {
+  border-radius: 5px;
+  background-color: #aca3a7;
+  color: black;
 }
 
-.centered-text {
-text-align: center;
-}
-
-.ml-2 {
-margin-left: 8rem;
-color: red;
-}
-
-.custom-link {
-  color: #2e2c2a
-}
-
-.custom-link:hover {
-  color: #fbc531
-}
-
+/* Button Styles */
 .btn-add {
   margin-top: 22px;
 }
 
-.btn-see {
+.btn-see, .btn-edit {
   margin-top: 10px;
 }
 
-.btn-fav{
+.btn-fav, .btn-qst {
   margin-left: 20px;
 }
 
-.btn-itm{
+.btn-itm {
   margin-bottom: 5px;
   margin-top: 2px;
 }
 
-.btn-bid{
+.btn-bid {
   margin-top: 5px;
 }
 
-.btn-qst{
-  margin-left: 20px;
-}
-
-.btn-resp{
+.btn-resp {
   margin-bottom: 10px;
 }
 
-.btn-edit{
+.btn-bus {
   margin-top: 10px;
 }
 
-.expired-message{
-  color: red
+.btn-cat {
+  padding: 2px;
+  margin-bottom: 5px;
 }
 
-.qst-usr{
-  color: yellow
+/* Link Styles */
+.custom-link {
+  color: #2e2c2a;
 }
 
-.qst-adm{
-  color: orangered
+.custom-link:hover {
+  color: #fbc531;
 }
 
-.qst-blk{
-  color: black
+/* Text and Font Styles */
+.centered-text {
+  text-align: center;
 }
 
-.hide-ask{
-  color: rgb(106, 2, 2)
+.ml-2 {
+  margin-left: 8rem;
+  color: red;
+}
+
+.expired-message {
+  color: red;
+}
+
+.qst-usr {
+  color: yellow;
+}
+
+.qst-adm {
+  color: orangered;
+}
+
+.qst-blk {
+  color: black;
+}
+
+.hide-ask {
+  color: rgb(106, 2, 2);
+}
+
+.alert {
+  color: yellow;
+}
+
+.notice {
+  color: orange;
+}
+
+/* Layout and Spacing Styles */
+.margin-right {
+  margin-right: 60px;
 }
 
 .action-buttons {
@@ -97,12 +113,3 @@ color: red;
   gap: 10px;
   margin-left: 5px;
 }
-
-.alert{
-  color: yellow
-}
-
-.notice{
-  color: orange
-}
-

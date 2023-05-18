@@ -1,7 +1,7 @@
 class AuctionLotsController < ApplicationController
   before_action :check_status, only: [:remove_product, :add_product]
   before_action :set_auction, only: [:edit, :update, :show, :destroy, :approve, :remove_product, :add_product, 
-                                      :favorite, :unfavorite, :question_lot]
+                                      :favorite, :unfavorite, :question_lot, :close_or_cancel ]
   before_action :expire_lots, only: [:show, :edit, :update]
   before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy, :expired]
   before_action :authenticate_user!, only: [:favorites, :winner]
@@ -83,7 +83,6 @@ class AuctionLotsController < ApplicationController
   
   
   def add_product
-    @auction_lot = AuctionLot.find(params[:id])
     product_id = params[:product_id]
     if product_id.present?
       @product = Product.find(product_id)
@@ -98,7 +97,6 @@ class AuctionLotsController < ApplicationController
   end
 
   def remove_product
-    @auction_lot = AuctionLot.find(params[:id])
     @product = @auction_lot.products.find_by(id: params[:product_id])
     if @product.try(:update, auction_lot_id: nil)
       redirect_to @auction_lot, notice: 'Produto removido com sucesso.'
@@ -108,7 +106,6 @@ class AuctionLotsController < ApplicationController
   end
 
   def close_or_cancel
-    @auction_lot = AuctionLot.find(params[:id])
     if @auction_lot.bids.count > 0
         @auction_lot.update!(status: :closed)
     else
@@ -138,6 +135,14 @@ class AuctionLotsController < ApplicationController
   def favorites
     @favorites = current_user.favorites
   end
+
+  def search
+    @auction_lots = AuctionLot.joins(products: :product_model)
+                              .where("auction_lots.code LIKE :search OR product_models.name LIKE :search", 
+                                search: "%#{params[:search]}%").where(status: "approved").distinct
+  end
+  
+  
 
  
   private

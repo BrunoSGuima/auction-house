@@ -16,9 +16,11 @@
 			<%= f.label :name %>
       <%= f.text_field :name %>
 		</div> <br>
-
-<%= f.submit 'Criar' %>
-
-<%= link_to('Voltar', root_path)%>
+	<div>
+	<%= f.submit 'Criar', class: 'btn btn-success' %>
+	</div>
+	<div>
+	<%= link_to 'Voltar', root_path, class: 'btn btn-warning btn-bus' %>
+	</div>
 
 <% end %>

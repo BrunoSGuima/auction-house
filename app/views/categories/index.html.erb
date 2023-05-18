@@ -1,15 +1,15 @@
-<%= link_to 'Nova Categoria', new_category_path %>
+<%= link_to 'Nova Categoria', new_category_path, class: 'btn btn-primary' %>
 <h2>Categorias cadastradas:</h2>
 <ul>
   <% @categories.each do |cat| %>
     <li>
       <div>
         <span><%= cat.name %></span>
-        <%= link_to 'Editar', edit_category_path(cat) %>
+        <%= link_to 'Editar', edit_category_path(cat), class: 'btn btn-info btn-cat' %>
       </div>
     </li>
   <% end %>
 </ul>
 
-<div><%= link_to('Voltar', root_path) %></div>
+<%= link_to 'Voltar', root_path, class: 'btn btn-warning btn-bid' %>
 
