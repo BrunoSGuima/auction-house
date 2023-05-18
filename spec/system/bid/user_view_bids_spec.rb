@@ -121,11 +121,12 @@ describe "Usuário visita tela de bids" do
     expect(current_path).to eq user_session_path 
   end
 
-  it "e tenta fazer um lance com a conta suspensa" do
-    user = User.create!(name: 'Bruno', email: 'bruno@email.com', password: 'password', cpf: '48625343171', status: "suspended")
+  it "e tenta fazer um lance com o cpf bloqueado" do
+    user = User.create!(name: 'Bruno', email: 'bruno@email.com', password: 'password', cpf: '48625343171')
     admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '67428513847')
     auction = AuctionLot.create!(code: 'A1CB34', start_date: Date.today , limit_date: 1.week.from_now, 
                                 value_min: 100, diff_min: 50, status: 'approved', user: admin)
+    BlockedCpf.create!(cpf:'48625343171')
 
 
     login_as user

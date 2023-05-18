@@ -4,9 +4,13 @@ Rails.application.routes.draw do
   resources :users, only: [:index] do
     patch 'block', on: :member
     patch 'unblock', on: :member
-    patch 'suspend', on: :member
+    post 'block_cpf', on: :member
   end
   
+  resources :blocked_cpfs, only: [:create] do
+    delete :destroy, on: :member
+  end
+
 
   root to: 'home#index'
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_17_231956) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_18_010703) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -69,6 +69,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_231956) do
     t.datetime "updated_at", null: false
     t.index ["auction_lot_id"], name: "index_bids_on_auction_lot_id"
     t.index ["user_id"], name: "index_bids_on_user_id"
+  end
+
+  create_table "blocked_cpfs", force: :cascade do |t|
+    t.string "cpf"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cpf"], name: "index_blocked_cpfs_on_cpf", unique: true
+    t.index ["user_id"], name: "index_blocked_cpfs_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -147,6 +156,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_231956) do
   add_foreign_key "auction_lots", "users"
   add_foreign_key "bids", "auction_lots"
   add_foreign_key "bids", "users"
+  add_foreign_key "blocked_cpfs", "users"
   add_foreign_key "favorite_auction_lots", "auction_lots"
   add_foreign_key "favorite_auction_lots", "users"
   add_foreign_key "product_models", "categories"

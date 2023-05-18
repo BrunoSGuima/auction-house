@@ -3,7 +3,8 @@ class AuctionLotsController < ApplicationController
   before_action :set_auction, only: [:edit, :update, :show, :destroy, :approve, :remove_product, :add_product, 
                                       :favorite, :unfavorite, :question_lot]
   before_action :expire_lots, only: [:show, :edit, :update]
-  before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authorize_admin, only: [:new, :create, :edit, :update, :destroy, :expired]
+  before_action :authenticate_user!, only: [:favorites, :winner]
 
  
   def new

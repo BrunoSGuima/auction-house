@@ -62,7 +62,7 @@
 		<% @auction_lot.products.each do |product| %>
 			<div class="product">
 				<%= "#{product.product_model.name} - ID: #{product.id}" %>
-				<%= button_to 'Remover Produto', remove_product_auction_lot_path(@auction_lot, product_id: product.id), method: :delete, class: 'btn btn-danger btn-bid' %> 
+				<%= button_to 'Remover Produto', remove_product_auction_lot_path(@auction_lot, product_id: product.id), method: :delete, class: 'btn btn-danger btn-bid', id: dom_id(product) %> 
 			</div>
 		<% end %>
 				

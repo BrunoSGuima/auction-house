@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Admin bloqueia cpf" do
+describe "Admin bloqueia" do
   it "a partir do menu" do
     user = User.create!(name: 'Bruno', email: 'bruno@email.com', password: 'password', cpf: '48625343171')
     admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '67428513847')
@@ -20,14 +20,14 @@ describe "Admin bloqueia cpf" do
     expect(page).to have_button "Bloquear" 
   end
 
-  it "e bloqueia usuário" do
+  it "usuário" do
     user = User.create!(name: 'Bruno', email: 'bruno@email.com', password: 'password', cpf: '48625343171')
     admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '67428513847')
     
     login_as admin
     visit root_path
     click_on "Usuários Cadastrados"
-    click_on "Bloquear"
+    find("#block_user_1").click
     
 
     expect(page).to have_button "Desbloquear"
@@ -41,25 +41,40 @@ describe "Admin bloqueia cpf" do
     login_as admin
     visit root_path
     click_on "Usuários Cadastrados"
-    click_on "Desbloquear"
+    find("#unblock_user_1").click
     
 
     expect(page).to have_button "Bloquear"
     expect(page).to have_content "As restrições de acesso foram removidas." 
   end
 
-  it "e suspende usuário" do
+  it "CPF do usuário" do
     user = User.create!(name: 'Bruno', email: 'bruno@email.com', password: 'password', cpf: '48625343171')
     admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '67428513847')
     
     login_as admin
     visit root_path
     click_on "Usuários Cadastrados"
-    click_on "Suspender"
+    find("#block_cpf_user_1").click
     
 
     expect(page).to have_button "Liberar"
-    expect(page).to have_content "Usuário foi suspenso." 
+    expect(page).to have_content "CPF bloqueado com sucesso" 
+  end
+
+  it "e desbloqueia CPF do usuário" do
+    user = User.create!(name: 'Bruno', email: 'bruno@email.com', password: 'password', cpf: '48625343171')
+    admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '67428513847')
+    BlockedCpf.create(cpf: '48625343171')
+    
+    login_as admin
+    visit root_path
+    click_on "Usuários Cadastrados"
+    find("#unblock_cpf_user_1").click
+    
+
+    expect(page).to have_button "Bloquear CPF"
+    expect(page).to have_content "CPF 48625343171 desbloqueado com sucesso!" 
   end
 
 end

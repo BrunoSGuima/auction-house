@@ -88,11 +88,12 @@ describe "Usuário visita lote e" do
     expect(page).not_to have_content "Quero saber isso, isso e isso."
   end
 
-  it "e tenta fazer uma pergunta com a conta suspensa" do
-    user = User.create!(name: 'Bruno', email: 'bruno@email.com', password: 'password', cpf: '48625343171', status: "suspended")
+  it "e tenta fazer uma pergunta com o cpf bloqueado" do
+    user = User.create!(name: 'Bruno', email: 'bruno@email.com', password: 'password', cpf: '48625343171')
     admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '67428513847')
     lot = AuctionLot.create!(code: 'A1CB34', start_date: 1.day.from_now, limit_date: 3.days.from_now, 
       value_min: 100, diff_min: 100, status: 'approved', user: user )
+    BlockedCpf.create!(cpf:'48625343171')
 
 
     login_as user

@@ -8,9 +8,18 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_admin
-    if current_user.role != "admin"
+    if current_user == nil
+      redirect_to root_path, alert: "Permissão negada"
+    elsif current_user.role != "admin"
       redirect_to root_path, alert: "Permissão negada"
     end
+  end
+
+  def after_sign_in_path_for(resource)
+    if resource.cpf_blocked?
+      flash[:alert] = 'Sua conta está suspensa.'
+    end
+    super
   end
 end
 

@@ -1,8 +1,8 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:update, :hide, :show, :edit]
   before_action :set_auction_lot, only: [:new, :create]
+  before_action :authorize_admin, only: [:update, :hide, :index, :edit]
   before_action :authenticate_user!, except: [:show]
-  before_action :authenticate_admin!, only: [:update, :hide]
   before_action :check_user_status, only: [:create, :new]
 
   def index
@@ -57,7 +57,7 @@ class QuestionsController < ApplicationController
   end
 
   def check_user_status
-    if current_user.suspended?
+    if current_user.cpf_blocked?
       redirect_to @auction_lot, alert: 'Sua conta está suspensa.'
     end
   end
@@ -74,7 +74,4 @@ class QuestionsController < ApplicationController
       params.require(:question).permit(:response_text, :admin_id)
   end
 
-  def authenticate_admin!
-      redirect_to root_path, alert: 'Apenas administradores podem responder ou ocultar perguntas.' unless current_user.admin?
-  end
 end

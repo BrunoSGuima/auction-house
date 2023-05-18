@@ -16,7 +16,7 @@ describe "Admin edita um galpão" do
 
 
 
-    expect(page).to have_content('Editar Lote')
+    expect(page).to have_content 'Editar Lote'
     expect(page).to have_field 'Código', with: "A1CB34"
     expect(page).to have_field 'Valor mínimo do lance', with: '100'
     expect(page).to have_field 'Diferença mínima do lance', with: '50'

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :cpf, :name, presence: true
   validates :cpf, uniqueness: true
   validate :cpf_validation
+  validate :cpf_not_blocked, on: :create
   has_many :auction_lots
   has_many :auction_approvals, foreign_key: 'approved_by_id', dependent: :nullify
 
@@ -13,7 +14,7 @@ class User < ApplicationRecord
   has_many :questions
   has_many :admin_questions, class_name: 'Question', foreign_key: 'admin_id'
 
-  enum status: { unblocked: 0, blocked: 5, suspended: 10 }
+  enum status: { unblocked: 0, blocked: 5 }
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
   before_save :set_admin_role
@@ -30,15 +31,8 @@ class User < ApplicationRecord
     "#{name} - #{email} - #{role.upcase}"
   end
 
-  def suspended?
-    self.status == 'suspended'
-  end
-
-  def suspend!
-    self.status = :suspended
-    unless save
-      errors.add(:base, "Não foi possível suspender o usuário")
-    end
+  def cpf_blocked?
+    BlockedCpf.exists?(cpf: self.cpf)
   end
 
   def blocked?
@@ -67,7 +61,6 @@ class User < ApplicationRecord
     blocked? ? :blocked : super
   end
   
-
   private
   
   def set_admin_role
@@ -75,8 +68,13 @@ class User < ApplicationRecord
       self.role = :admin
     end
   end
-  
 
+  def cpf_not_blocked
+    if BlockedCpf.exists?(cpf: self.cpf)
+      errors.add(:cpf, 'Este CPF está bloqueado.')
+    end
+  end
+  
   def cpf_validation
     errors.add(:cpf, 'INVÁLIDO!') unless cpf_valido(cpf)
   end

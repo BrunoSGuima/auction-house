@@ -4,6 +4,7 @@
       <th>Nome</th>
       <th>Email</th>
       <th>CPF</th>
+      <th>Ações</th>
     </tr>
   </thead>
   <tbody>
@@ -15,14 +16,15 @@
         <td>
           <div class="action-buttons">
             <% unless user.blocked? %>
-              <%= button_to 'Bloquear', block_user_path(user), method: :patch, class: 'btn btn-danger' %>
+              <%= button_to 'Bloquear Usuário', block_user_path(user), method: :patch, class: 'btn btn-danger btn-bid', id: dom_id(user, 'block') %>
             <% else %>
-              <%= button_to 'Desbloquear', unblock_user_path(user), method: :patch, class: 'btn btn-success' %>
+              <%= button_to 'Desbloquear Usuário', unblock_user_path(user), method: :patch, class: 'btn btn-success btn-bid', id: dom_id(user, 'unblock') %>
             <% end %>
-            <% unless user.suspended? %>
-              <%= button_to 'Suspender', suspend_user_path(user), method: :patch, class: 'btn btn-danger' %>
+            <% blocked_cpf = BlockedCpf.find_by(cpf: user.cpf) %>
+            <% unless user.cpf_blocked? %>
+              <%= button_to 'Bloquear CPF', block_cpf_user_path(user), method: :post, class: 'btn btn-warning btn-bid', id: dom_id(user, 'block_cpf') %>
             <% else %>
-              <%= button_to 'Liberar', unblock_user_path(user), method: :patch, class: 'btn btn-success' %>
+              <%= button_to 'Liberar', blocked_cpf_path(blocked_cpf), method: :delete, class: 'btn btn-success btn-bid', id: dom_id(user, 'unblock_cpf') %>
             <% end %>
           </div>
         </td>
@@ -31,5 +33,11 @@
   </tbody>
 </table>
 
-
-
+<div class="mt-5">
+  <h2>Bloquear um CPF</h2>
+  <%= form_with(model: BlockedCpf.new, url: blocked_cpfs_path, method: :post) do |form| %>
+    <%= form.label :cpf, 'Digite o CPF a ser bloqueado' %>
+    <%= form.text_field :cpf %>
+    <%= form.submit 'Bloquear CPF', class: 'btn btn-warning btn-resp' %>
+  <% end %>
+</div>

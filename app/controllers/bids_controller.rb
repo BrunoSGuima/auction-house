@@ -40,7 +40,7 @@ class BidsController < ApplicationController
   end
 
   def check_user_status
-    if current_user.suspended?
+    if current_user.cpf_blocked?
       redirect_to @auction_lot, alert: 'Sua conta está suspensa.'
     end
   end

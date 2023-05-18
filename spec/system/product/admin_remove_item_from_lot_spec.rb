@@ -17,7 +17,7 @@ describe "Admin remove produtos do pedido" do
     login_as user
     visit root_path
     click_on auction.code
-    first(:button, 'Remover Produto').click
+    find("#product_1").click
     
 
     expect(current_path).to eq current_path
@@ -41,7 +41,8 @@ describe "Admin remove produtos do pedido" do
     login_as user
     visit root_path
     click_on auction.code
-    first(:button, 'Remover Produto').click
+    find("#product_1").click
+
     
 
     expect(current_path).to eq current_path

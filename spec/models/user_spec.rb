@@ -20,7 +20,7 @@ RSpec.describe User, type: :model do
       result = u.admin_desc()
 
       expect(result).to  eq('Julia do Pão - julia@leilaodogalpao.com.br - ADMIN')
-      expect(result).not_to  eq('Julia do Pão - julia@leilaodogalpao.com.br - USER')
+      expect(User.last.role).to eq "admin"
       
     end
     

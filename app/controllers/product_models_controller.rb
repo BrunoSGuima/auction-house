@@ -1,6 +1,6 @@
 class ProductModelsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :index]
   before_action :authorize_admin, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_product_model, only: [:show, :edit, :update]
   
   def index
