@@ -48,7 +48,9 @@
 
 Ruby 2.7.0 ou superior
 Rails 6.0.0 ou superior
+
 Gem Devise
+
 Bootstrap
 
 ## Como rodar a aplicação :arrow_forward:
