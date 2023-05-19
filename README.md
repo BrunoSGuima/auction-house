@@ -98,7 +98,8 @@ Este projeto utiliza o RSpec como sua principal ferramenta de testes. Siga os pa
 
 ## :floppy_disk:
 
-<iframe src="https://giphy.com/embed/1oDsJobSjjdHxoLxZv" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/nowapocalypse-season-1-starz-now-apocalypse-1oDsJobSjjdHxoLxZv">via GIPHY</a></p>
+![login](https://github.com/BrunoSGuima/auction-house/assets/105590450/d33192c7-7282-408e-bace-9c0a5256b3c0)
+
 
 ### Usuários:
 
@@ -129,5 +130,6 @@ The [MIT License]() (MIT)
 
 Copyright :copyright: 2023 - Leilão do Galpão
 
+![giphy](https://github.com/BrunoSGuima/auction-house/assets/105590450/40dab83f-a2a4-4646-9e6f-47eff1ee2a5f)
 
-<iframe src="https://giphy.com/embed/lD76yTC5zxZPG" width="480" height="352" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/the-end-thats-all-folks-lD76yTC5zxZPG">via GIPHY</a></p>
+
