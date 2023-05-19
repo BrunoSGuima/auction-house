@@ -27,7 +27,7 @@ describe "Admin edita um galpão" do
 
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
-    AuctionLot.create!(code: 'A1CB34', start_date: '10/10/2050' , limit_date: '10/11/2050', 
+    AuctionLot.create!(code: 'A1CB34', start_date: 2.days.from_now , limit_date: 500.days.from_now, 
                       value_min: 100, diff_min: 50, status: 'pending', user: user)
 
 
@@ -37,7 +37,7 @@ describe "Admin edita um galpão" do
     click_on 'Editar'
 
     fill_in "Valor mínimo do lance",	with: '150'
-    fill_in 'Data de início',	with: '10/10/2050'
+    fill_in 'Data de início',	with: '10/10/2023'
     fill_in 'Diferença mínima do lance',	with: '100'
     click_on 'Enviar'
     
@@ -45,7 +45,7 @@ describe "Admin edita um galpão" do
     expect(page).to  have_content "Lote atualizado com sucesso!"
     expect(page).to  have_content "Lote de leilão A1CB34"
     expect(page).to  have_content "Valor mínimo do lance: 150"
-    expect(page).to  have_content "Data de início: 10/10/2050"
+    expect(page).to  have_content "Data de início: 10/10/2023"
   end
 
   it "mantém os campos obrigatórios" do
@@ -71,7 +71,7 @@ describe "Admin edita um galpão" do
 
   it "com lote aprovado" do
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
-    AuctionLot.create!(code: 'A1CB34', start_date: '10/10/2050' , limit_date: '10/11/2050', 
+    AuctionLot.create!(code: 'A1CB34', start_date: Date.today, limit_date: 5.days.from_now, 
                       value_min: 100, diff_min: 50, status: 'approved', user: user)
 
 
@@ -89,7 +89,7 @@ describe "Admin edita um galpão" do
     expect(page).to  have_content 'Só é permitido atualizar lotes com status: "Aguardando aprovação".'
     expect(page).to  have_content "Lote de leilão A1CB34"
     expect(page).to  have_content "Valor mínimo do lance: 100"
-    expect(page).to  have_content "Data de início: 10/10/2050"
+    expect(page).to  have_content Date.today.strftime('%d/%m/%Y')
     expect(page).to  have_content "Diferença mínima do lance: 50"
   end
   

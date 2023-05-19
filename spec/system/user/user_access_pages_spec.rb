@@ -142,7 +142,7 @@ describe "Usuário" do
 
   it "autenticado visita tela de edição de lotes" do
     admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
-    auction = AuctionLot.create!(code: 'A1CB34', start_date: '10/10/2050' , limit_date: '10/11/2050', 
+    auction = AuctionLot.create!(code: 'A1CB34', start_date: 1.day.from_now , limit_date: 5.days.from_now, 
                       value_min: 100, diff_min: 50, status: 'approved', user: admin)
     user = User.create!(name: 'Bruno', email: 'bruno@email.com', password: 'password', cpf: '38639395730')
     

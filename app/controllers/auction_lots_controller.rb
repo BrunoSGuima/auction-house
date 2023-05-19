@@ -152,8 +152,8 @@ class AuctionLotsController < ApplicationController
 
   def check_status
     @auction_lot = AuctionLot.find(params[:id])
-    unless @auction_lot.status == 'pending' || @auction_lot.status ==  'expired'
-      redirect_to @auction_lot, notice: 'Os itens só podem ser alterados enquanto seu status é "aguardando aprovação" ou "expirado".'
+    unless @auction_lot.status == 'pending'
+      redirect_to @auction_lot, notice: 'Os itens só podem ser alterados enquanto seu status é "aguardando aprovação".'
     end
   end
 

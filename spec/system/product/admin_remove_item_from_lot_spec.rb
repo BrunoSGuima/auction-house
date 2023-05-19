@@ -46,7 +46,7 @@ describe "Admin remove produtos do pedido" do
     
 
     expect(current_path).to eq current_path
-    expect(page).to have_content 'Os itens só podem ser alterados enquanto seu status é "aguardando aprovação" ou "expirado".'
+    expect(page).to have_content 'Os itens só podem ser alterados enquanto seu status é "aguardando aprovação".'
     expect(page).to have_content 'Tv 32 - Quantidade: 1'
     expect(page).to have_content 'Tv 50 - Quantidade: 1'
   end
