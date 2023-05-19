@@ -100,8 +100,7 @@ Este projeto utiliza o RSpec como sua principal ferramenta de testes. Siga os pa
 
 
 ## :floppy_disk:
-### Usuários:![login (2)](https://github.com/BrunoSGuima/auction-house/assets/105590450/a7152278-7bc7-4874-ac83-857872557c5c)
-
+### Usuários:
 
 |email|password|
 | -------- |-------- |
