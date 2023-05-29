@@ -3,7 +3,7 @@
   <ul>
     <% @auction_lots.each do |auction_lot| %>
       <li>
-        <h3><%= link_to auction_lot.code, auction_lot_path(auction_lot) %></h3>
+        <h3><%= link_to auction_lot.code, auction_lot_path(auction_lot), class: "btn btn-primary" %></h3>
         <p>Produtos:</p>
         <ul>
           <% auction_lot.products.each do |product| %>

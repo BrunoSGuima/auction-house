@@ -27,7 +27,7 @@ describe "Admin bloqueia" do
     login_as admin
     visit root_path
     click_on "Usuários Cadastrados"
-    find("#block_user_1").click
+    find("#block_user_#{user.id}").click
     
 
     expect(page).to have_button "Desbloquear"
@@ -41,7 +41,7 @@ describe "Admin bloqueia" do
     login_as admin
     visit root_path
     click_on "Usuários Cadastrados"
-    find("#unblock_user_1").click
+    find("#unblock_user_#{user.id}").click
     
 
     expect(page).to have_button "Bloquear"
@@ -55,7 +55,7 @@ describe "Admin bloqueia" do
     login_as admin
     visit root_path
     click_on "Usuários Cadastrados"
-    find("#block_cpf_user_1").click
+    find("#block_cpf_user_#{user.id}").click
     
 
     expect(page).to have_button "Liberar"
@@ -70,11 +70,53 @@ describe "Admin bloqueia" do
     login_as admin
     visit root_path
     click_on "Usuários Cadastrados"
-    find("#unblock_cpf_user_1").click
+    find("#unblock_cpf_user_#{user.id}").click
     
 
     expect(page).to have_button "Bloquear CPF"
     expect(page).to have_content "CPF 48625343171 desbloqueado com sucesso!" 
   end
+
+  it "CPF que não é usuário" do
+    admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '67428513847')
+    
+    login_as admin
+    visit root_path
+    click_on "Usuários Cadastrados"
+    fill_in "Digite o CPF a ser bloqueado",	with: "76688342650"
+    find("#block_cpf_outside").click
+    
+
+    expect(page).to have_content "CPF bloqueado com sucesso." 
+  end
+
+  it "CPF inválido" do
+    admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '67428513847')
+    
+    login_as admin
+    visit root_path
+    click_on "Usuários Cadastrados"
+    fill_in "Digite o CPF a ser bloqueado",	with: "7668834265"
+    find("#block_cpf_outside").click
+    
+
+    expect(page).to have_content "Digite um CPF válido para bloquear." 
+  end
+
+  it "CPF que já está bloqueado" do
+    admin = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '67428513847')
+    BlockedCpf.create(cpf: '48625343171')
+    
+    login_as admin
+    visit root_path
+    click_on "Usuários Cadastrados"
+    fill_in "Digite o CPF a ser bloqueado",	with: "48625343171"
+    find("#block_cpf_outside").click
+    
+
+    expect(page).to have_content "Digite um CPF válido para bloquear." 
+  end
+
+
 
 end

@@ -38,7 +38,7 @@
   <%= form_with(model: BlockedCpf.new, url: blocked_cpfs_path, method: :post) do |form| %>
     <%= form.label :cpf, 'Digite o CPF a ser bloqueado' %>
     <%= form.text_field :cpf %>
-    <%= form.submit 'Bloquear CPF', class: 'btn btn-warning btn-resp' %>
+    <%= form.submit 'Bloquear CPF', class: 'btn btn-warning btn-resp', id: 'block_cpf_outside' %>
   <% end %>
 </div>
 

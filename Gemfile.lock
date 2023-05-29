@@ -98,6 +98,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    docile (1.4.0)
     erubi (1.12.0)
     execjs (2.8.1)
     ffi (1.15.5)
@@ -209,6 +210,12 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -245,6 +252,8 @@ DEPENDENCIES
   rails (~> 7.0.4, >= 7.0.4.3)
   rspec-rails
   sassc
+  simplecov (~> 0.22.0)
+  simplecov_json_formatter (~> 0.1.4)
   sprockets-rails
   sqlite3 (~> 1.4)
   tzinfo-data

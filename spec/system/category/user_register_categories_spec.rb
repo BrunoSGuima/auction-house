@@ -1,23 +1,23 @@
 require 'rails_helper'
 
-describe "Usuário cadastra uma categoria" do
-  it "a partir do menu" do
+describe "Admin cadastra uma categoria" do
+  it "e usuário não vê no menu" do
     user = User.create!(name: 'Bruno', email: 'bruno@email.com', password: 'password', cpf: '48625343171')
     
     login_as user
     visit root_path
     
 
-    expect(page).not_to have_field('Categoria')
+    expect(page).not_to have_field('Categorias')
   end
 
-  it "como Admin, e vê detalhes" do
+  it "e vê detalhes" do
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
     Category.create!(name: "Esportes")
     
     login_as user
     visit root_path
-    click_on 'Categoria'
+    click_on 'Categorias'
     
 
     expect(page).to have_link "Nova Categoria"
@@ -26,12 +26,12 @@ describe "Usuário cadastra uma categoria" do
     expect(page).to have_link "Voltar"
   end
 
-  it "como Admin, com sucesso" do
+  it "com sucesso" do
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
     
     login_as user
     visit root_path
-    click_on 'Categoria'
+    click_on 'Categorias'
     click_on 'Nova Categoria'
     fill_in "Nome",	with: "Ferramentas"
     click_on 'Criar'
@@ -39,13 +39,13 @@ describe "Usuário cadastra uma categoria" do
     expect(page).to have_content 'Categoria cadastrada com sucesso.'
   end
 
-  it "como ADMIN, e com dados em branco" do
+  it "e com dados em branco" do
 
     user = User.create!(name: 'Bruno', email: 'bruno@leilaodogalpao.com.br', password: 'password', cpf: '48625343171')
     
     login_as user
     visit root_path
-    click_on 'Categoria'
+    click_on 'Categorias'
     click_on 'Nova Categoria'
     fill_in "Nome",	with: ""
     click_on 'Criar'

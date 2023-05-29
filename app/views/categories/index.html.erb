@@ -5,7 +5,7 @@
     <li>
       <div>
         <span><%= cat.name %></span>
-        <%= link_to 'Editar', edit_category_path(cat), class: 'btn btn-info btn-cat' %>
+        <%= link_to 'Editar', edit_category_path(cat), class: 'btn btn-info btn-cat', id: dom_id(cat, 'edit') %>
       </div>
     </li>
   <% end %>
