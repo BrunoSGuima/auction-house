@@ -70,6 +70,7 @@ bundle install
 4. Crie o banco de dados e execute as migrações:
 
 rails db:create
+e depois:
 rails db:migrate
 
 5. Execute o comando:
